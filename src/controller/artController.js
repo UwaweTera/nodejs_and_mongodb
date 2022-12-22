@@ -5,11 +5,13 @@ import 'dotenv/config';
 import {Post, Comment, Like} from "../model/articleMod";
 import UserReg from "../model/registerMod";
 import session from 'express-session';
-
+import cloudinary from '../cloudinary';
 
 //some global variable
 const SecretKey = process.env.JWT_SECRET;
 const userSecret = process.env.USER_SECRET;
+
+
 
 //adding blog post
 const addBlog =async (req,res)=>{
@@ -17,9 +19,15 @@ const addBlog =async (req,res)=>{
         if(err){
             res.send('login before add blog');
         }else{
+            const uplodImage = await cloudinary.uploader.upload(req.body.image, {
+                folder: 'upload_image'
+            })
             const insBlog = new Post({
                 head: req.body.header,
-                image: req.body.img,
+                image: {
+                    public_id: uplodImage.public_id,
+                    url: uplodImage.secure_url
+                },
                 body: req.body.content,
                 comment: [],
                 likeCount: 0
