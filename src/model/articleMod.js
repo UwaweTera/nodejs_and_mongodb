@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import UserReg from "./registerMod";
 
 const Schema =  mongoose.Schema;
 
@@ -9,14 +8,8 @@ const blogSchema = new Schema({
         required: true
     },
     image: {
-        public_id: {
-            type: String,
-            required: true
-        },
-        url:{
-            type: String,
-            required: true
-        }
+        type: String,
+        required: true
     },
     body: {
         type: String,
@@ -26,10 +19,10 @@ const blogSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref : 'Comment'
     }],
-    likes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref : 'Like'
-    }]
+    likes: {
+        count: Number,
+        Peaples: []
+    }
 
 });
 

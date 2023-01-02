@@ -1,0 +1,29 @@
+import request from "supertest";
+import app from "../../app";
+
+
+//Getting all tokens
+const token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWQzOGI3NDc5NzBmNDg0MmJmY2E1NCIsImlhdCI6MTY3MjI5NjY0NX0.PbNXejxULJrsa7BdffphHoPbBZej7HDFRn6ghKal9iU'
+const userToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWQzYmNhYTkxZDZjMWYyMTY1ZmQwYyIsImlhdCI6MTY3MjI5NzQzMH0.39t1BxlTTqCQAQPRBELiUF6Y3Nl6E3-2DdwprbY_WQ0';
+
+const getBlog = ()=>{
+    return request(app).post('/blogs').set('Authorization',token).send({
+        head: "Ip",
+        image: "ji.jpg",
+        bod: ""
+    })
+}
+
+//adding blog
+test('adding blog for middleware', async()=>{
+    const result = await getBlog();
+    expect(result.statusCode).toBe(400)
+})
+
+//update blog
+/* test('update blog in middleware', async()=>{
+    const result = await getBlog();
+    const id = result.body._id;
+    const response = await request(app).patch(`/blogs/${id}/update`).set('Authorization',token);
+    expect(response.statusCode).toBe(400)
+}) */

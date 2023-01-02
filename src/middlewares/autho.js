@@ -1,50 +1,81 @@
-import Jwt  from "jsonwebtoken";
+import jwt  from "jsonwebtoken";
+import {Signup} from "../model/registerMod";
+import bcrypt from 'bcryptjs';
+import passport from "passport";
+import { Strategy as JwtStrategy } from "passport-jwt";
+import { ExtractJwt as ExtractJwt } from "passport-jwt";
+import { regVal,UserRegVal } from "../validater/regValidate";
+import { Strategy as LocalStrategy}  from "passport-local";
 
-const verifyTokens = (req,res,next)=>{
+const SecretKey = process.env.JWT_SECRET;
+const userSecret = process.env.USER_SECRET;
+
+/* const verifyTokens = (req,res,next)=>{
     //Create authorization header
     const BearerHeader = req.headers['authorization'];
     if (typeof BearerHeader !== 'undefined') {
         //splite token
-        const bearerToken = BearerHeader.split(' ')[1];
+        const token = BearerHeader.split(' ')[1];
         //set token
-        req.token = bearerToken;
-        next()
+        jwt.verify(token,SecretKey,(error, decodedToken)=>{
+            if (error) {
+                res.status(401);
+                res.send('Login before. wrong token!');
+            }else{
+                next()
+            }
+        })
     }else{
-        res.send('Login before ')
+        res.status(401);
+        res.send('Login before, no token')
     }
-}
+} */
 
-const verifyUserTokens = (req,res,next)=>{
-    //Create authorization header
-    const BearerHeader = req.headers['authorization'];
-    if (typeof BearerHeader !== 'undefined') {
-        //splite token
-        const bearerToken = BearerHeader.split(' ')[1];
-        //set token
-        req.token = bearerToken;
-        next()
-    }else{
-        res.send('Login before ')
+passport.use(
+    new LocalStrategy(
+      {
+        usernameField: "email",
+        passwordField: "password",
+      },
+      async (email, password, done) => {
+        const user = await Signup.findOne({ email });
+        if (!user) {
+          return done(null, false, { message: "User not found" });
+        }
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+          return done(null, false, { message: "Incorrect password or email" });
+        }
+        return done(null, user);
     }
-}
+    )
+  );
+  
+  passport.use(
+      "jwt",
+      new JwtStrategy(
+        {
+          jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+          secretOrKey: userSecret,
+        },
+        async (jwtPayload, done) => {
+          const user = await Signup.findById(jwtPayload.id);
+          if (!user) {
+            return done(null, false, { message: "User not found" });
+          }
+          return done(null, user);
+        }
+      )
+    );
 
-// signup validation
-const signupVald =async(req,res,next)=>{
+
+//admin validation
+const adminVald =async(req,res,next)=>{
     const {error, value} = regVal.validate(req.body, {abortEarly: false});
     if(error){
-        return res.send(error.details[0].message)
+        return res.status(400).send(error.details[0].message)
     }
-    req.regVal = value;
-    next();
-}
-
-//login validation
-const loginVald =async(req,res,next)=>{
-    const {error, value} = regVal.validate(req.body, {abortEarly: false});
-    if(error){
-        return res.send(error.details[0].message)
-    }
-    req.regVal = value;
+    // req.regVal = value;
     next();
 }
 
@@ -53,10 +84,10 @@ const loginVald =async(req,res,next)=>{
 const UserVald =async(req,res,next)=>{
     const {error, value} = UserRegVal.validate(req.body, {abortEarly: false});
     if(error){
-        return res.send(error.details[0].message)
+        return res.status(400).send(error.details[0].message)
     }
-    req.regVal = value;
+    // req.regVal = value;
     next();
 } 
 
-export {verifyTokens, verifyUserTokens,UserVald,loginVald,signupVald}
+export {/*verifyTokens , verifyUserTokens */UserVald,adminVald}

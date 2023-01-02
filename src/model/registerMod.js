@@ -17,12 +17,6 @@ const UserRegSchema = new Schema({
     }
 })
 
-UserRegSchema.path('email').validate(async (email)=>{
-    const emailCount = await mongoose.models.UserReg.countDocuments({email})
-    return !emailCount
-}, 'Email already exists');
-
-const UserReg = mongoose.model("UserReg",UserRegSchema);
 
 // Registration schema to admin
 
@@ -33,7 +27,12 @@ const regSchema = new Schema({
     },
     email: {
         type: String,
+        unique: true,
         required: true
+    },
+    role:{
+        type:String,
+        default : 'Guest'
     },
     password: {
         type: String,
@@ -41,12 +40,13 @@ const regSchema = new Schema({
     }
 })
 
-regSchema.path('email').validate(async (email)=>{
+/* regSchema.path('email').validate(async (email)=>{
     const emailCount = await mongoose.models.Signup.countDocuments({email})
     return !emailCount
-}, 'Email already exists');
+}, 'Email already exists'); */
 
 //create contact model
 const Signup = mongoose.model("Signup",regSchema);
+const UserReg = mongoose.model("UserReg",UserRegSchema);
 
 export {UserReg, Signup}

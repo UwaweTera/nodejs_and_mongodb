@@ -2,15 +2,15 @@ import Joi from 'joi';
 
 //blog validation joi
 const blogValidation = Joi.object({
-    header: Joi.string().min(10).required(),
+    head: Joi.string().min(10).required(),
     image: Joi.string().required(),
-    content: Joi.string().min(10).required()
+    body: Joi.string().min(10).required()
 })
 //blog update validation joi
 const blogUpdVal = Joi.object({
-    header: Joi.string().min(10).required(),
+    head: Joi.string().min(10).required(),
     image: Joi.string().required(),
-    content: Joi.string().min(10).required()
+    body: Joi.string().min(10).required()
 })
 
 //comment validation joi

@@ -16,11 +16,11 @@ const contactSchema = new Schema({
         required: true
     }
 })
-
+/* 
 contactSchema.path('email').validate(async (email)=>{
     const emailCount = await mongoose.models.Contact.countDocuments({email})
     return !emailCount
-}, 'Email already exists');
+}, 'Email already exists'); */
 
 //create contact model
 const Contact = mongoose.model("Contact",contactSchema);
