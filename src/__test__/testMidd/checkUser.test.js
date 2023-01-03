@@ -15,7 +15,3 @@ const getBog = ()=>{
 }
 
 //testing blog for checking user
-
-test('Testing user to add blog',async()=>{
-    
-})

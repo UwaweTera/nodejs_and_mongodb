@@ -1,38 +1,37 @@
 import  express  from "express";
-import {Post, Comment, Like} from "../model/articleMod";
-import Contact from "../model/messageMod";
-import {verifyTokens , verifyUserTokens} from "../middlewares/autho";
-import {blogVal,updateVal,commVal/* ,contVal, signupVald,UserVald */} from "../middlewares/articleMid";
-import {addBlog,getBlogs,getBlogById,updateBlog,deleteBlog,addComm,allComm,getComm,delComment,like,getLike} from "../controller/artController";
-import {UserRegistration, userLogin}  from "../controller/regController";
-const router = express.Router();
+import "../../middlewares/autho";
+import passport from "passport";
+import { checkingAdmin,checkingUser } from "../../middlewares/checkUser";
+import {blogVal,updateVal,commVal} from "../../middlewares/articleMid";
+import {addBlog,getBlogs,getBlogById,updateBlog,deleteBlog,addComm,allComm,getComm,delComment,like,getLike} from "../../controller/artController";
+const router1 = express.Router();
 
 //get all blogs
-router.get("/blogs", getBlogs);
+router1.get('/', getBlogs);
 //get blogs by id
-router.get("/blogs/:id", getBlogById);
+router1.get('/:id', getBlogById);
 // adding articles
-router.post('/blogs',verifyTokens,blogVal, addBlog);
+router1.post('/',passport.authenticate('jwt',{session: false}),checkingAdmin,blogVal, addBlog);
 //update blogs
-router.patch('/blogs/:id/update',verifyTokens,updateVal, updateBlog);
+router1.patch('/:id/update',passport.authenticate('jwt',{session: false}),checkingAdmin,updateVal, updateBlog);
 //delete blogs
-router.delete('/blogs/:id/delete',verifyTokens,deleteBlog);
+router1.delete('/:id',passport.authenticate('jwt',{session: false}),checkingAdmin,deleteBlog);
 
 
 //add comments
-router.post('/blogs/:id/comment',verifyUserTokens,commVal,addComm)
+router1.post('/:id/comment',passport.authenticate('jwt',{session: false}),checkingUser,commVal,addComm)
+//read comment relate to post 
+router1.get('/:id/comments',getComm)
 //read all comments
-router.get('/comments',verifyTokens, allComm)
-//read comment relate to post =
-router.get('/blogs/:id/comments', getComm)
+router1.get('/comments',passport.authenticate('jwt',{session: false}),checkingAdmin, allComm)
 //delete comment
-router.delete('/comments/:id/delete',verifyTokens,delComment)
+router1.delete('/:id/comments/:commId',passport.authenticate('jwt',{session: false}),checkingAdmin,delComment)
+
 
 // add like 
-
-router.put('/blogs/:id/like',verifyUserTokens, like)
+router1.put('/:id/like',passport.authenticate('jwt',{session: false}),checkingUser, like)
 //get like related to post
-router.get('/blogs/:id/likes',getLike)
+router1.get('/:id/likes',getLike)
 
-export default router
+export default router1
 

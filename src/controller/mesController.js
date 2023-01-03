@@ -18,7 +18,6 @@ const ContactContr = async (req,res)=>{
         })
         await insContact.save()
         res.status(200).send('Message sent');
-
 } 
 
 //get all message
@@ -31,12 +30,13 @@ const messages = async(req, res)=>{
 
 //delete message
 const deleteMsg = async(req,res)=>{
-        const id = req.params.id;
-        if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).json('Not found');
-        await Contact.deleteOne({_id: id});
-        res.status(200).json({message: "message deleted"})
-
+        try {
+                const id = req.params.id;
+                await Contact.deleteOne({_id: id});
+                res.status(200).json("message deleted")
+        } catch (error) {
+                res.status(404).json('not found on delete')       
+        }
 } 
-
 
 export {ContactContr,messages,deleteMsg}

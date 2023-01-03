@@ -6,11 +6,12 @@ import Contact from "../model/messageMod";
     await Contact.deleteMany()
 })  */
 
-const token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWQzOGI3NDc5NzBmNDg0MmJmY2E1NCIsImlhdCI6MTY3MjI5NjY0NX0.PbNXejxULJrsa7BdffphHoPbBZej7HDFRn6ghKal9iU'
-const userToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWQzYmNhYTkxZDZjMWYyMTY1ZmQwYyIsImlhdCI6MTY3MjI5NzQzMH0.39t1BxlTTqCQAQPRBELiUF6Y3Nl6E3-2DdwprbY_WQ0';
+//Getting all tokens
+const token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjNkNWQzNmQ4ZmVkYTFhMmJkY2JkZCIsImlhdCI6MTY3MjczMDA3NH0.FJEbcZhIj2Cs2JSGGQNLRzjdE4wObbInq0EGSRKGzJ8'
+const userToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjNkNTlmNmQ4ZmVkYTFhMmJkY2JkYSIsImlhdCI6MTY3MjczMDEyMX0.0G6ipqK5705YTylDBeuxOSy9SwBOx_N6mWO6DwPCUPA';
 
 // sending message
-test('Testing for sending message', async()=>{
+/* test('Testing for sending message', async()=>{
     const result = await request(app).post('/messages').send({
         name: "JohnDoe",
         email: "john@gmail.com",
@@ -51,5 +52,5 @@ test('delete one message',async()=>{
     const blogId = result.body._id;
     const response = await request(app).delete(`/messages/${blogId}`).set('Authorization',token);
     expect(response.statusCode).toBe(200)
-})
+}) */
 

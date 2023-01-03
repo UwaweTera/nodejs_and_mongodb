@@ -16,7 +16,7 @@ app.use("/",router);
 
 try{
     mongoose.set('strictQuery', true);
-    mongoose.connect(dbURI,{useNewUrlParser: true}).then(()=>{
+    mongoose.connect(process.env.DBTESTURI,{useNewUrlParser: true}).then(()=>{
         console.log('connected to database')
     }).catch((err)=>{
         console.log("This Error: ",err.message);

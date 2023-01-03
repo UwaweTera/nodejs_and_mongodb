@@ -29,9 +29,7 @@ const UserRegistration = (req,res)=>{
             }else{
                 await enterUser.save()
                 res.status(200).json('Complite Signup')
-            }
-
-            
+            } 
         }
     })
     
@@ -66,15 +64,9 @@ const userLogin = async(req,res)=>{
             res.status(400).json('already there')
         }else{
             enterUser.save()
-            .then((result)=>{
-                res.json({
-                    message: "complite signup"
-                })
-            }).catch((error)=>{
-                res.json({error})
-            })
+            res.json('complite signup')
         }
-      
+
     })
     
 }

@@ -19,7 +19,7 @@ const addBlog =async (req,res)=>{
             body
         })
         const blog = await insBlog.save();
-        res.status(201).json(blog)
+        res.status(200).json(blog)
 }
 
 
@@ -92,19 +92,14 @@ const addComm = async(req,res)=>{
             text,
             blogId: id
         });
-        await comment.save().then((result)=>{
-            res.status(200).json('complite commenting')
-        }).catch((error)=>{
-            console.log(error);
-            res.status(500).json('error to comment')
-        });
+        await comment.save()
         const specifiedBlog = await Post.findById(id).populate('comments')
         specifiedBlog.comments.push(comment);
         specifiedBlog.save()
-        // res.status(200).json('complite to comment')        
+        res.status(200).json(comment)     
     } catch (error) {
         res.status(500);
-        res.send('Server error')
+        res.json('Server error')
     }
 }
 /* const addComm = async(req,res)=>{
@@ -176,8 +171,7 @@ const delComment = async(req,res)=>{
         await allComments.save();
         res.status(200).json('comment deleted')
     } catch (error) {
-        console.log(error)
-        res.status(404).json({error: "this comment found"})
+        res.status(404).json({error: "comment not found"})
     }
 }
 
@@ -197,7 +191,7 @@ const like = async(req,res)=>{
             await Post.findOneAndUpdate(
                 {_id: id},
                 {likes: {count,Peaples: peaple}}
-                );
+            );
                 res.status(200).json('liked')
         }else{
             let count = blog.likes.count - 1;
@@ -206,14 +200,12 @@ const like = async(req,res)=>{
             await Post.findOneAndUpdate(
                 {_id: id},
                 {likes: {count,Peaples: peaple}}
-                );
+            );
             
             res.status(200).json('like removed')
         }
     } catch (error) {
-        console.log(error)
-        res.status(500);
-        res.json('server error')
+        res.status(404).json('not found')
     }
 }
 
@@ -221,15 +213,12 @@ const like = async(req,res)=>{
 const getLike = async(req,res)=>{
     try {
         const id = req.params.id;
-        if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).json("Not found")
         let allLikes = await Post.findById(id);
         let getLikes = allLikes.likes;
-        res.json(getLikes.count);
-
+        res.status(200).json(getLikes.count);
     } catch (error) {
-        res.sendStatus(404).send({error: 'like not found'})
-        console.log(error);
+        res.status(404).json('like not found')
     }
-    
+
 }
 export {addBlog,getBlogs,getBlogById,updateBlog,deleteBlog,addComm,getComm,allComm,delComment,like,getLike}
