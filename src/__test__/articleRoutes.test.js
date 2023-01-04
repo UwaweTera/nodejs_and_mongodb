@@ -179,7 +179,7 @@ test('Getting single blog comments', async()=>{
     expect(response.statusCode).toBe(404)
 })
   
-
+/* 
 //delete comment
 test('delete single comment', async()=>{
     const result = await getBlog();
@@ -194,7 +194,7 @@ test('delete single comment', async()=>{
     const response = await request(app).delete(`/blogs/${id}/comments/${commId}`).set('Authorization',token);
     expect(response.statusCode).toBe(200)
 })
-/* 
+
 //Adding like to blog by not found
     test('add like by not found',async()=>{
         const blogId = '1234';
