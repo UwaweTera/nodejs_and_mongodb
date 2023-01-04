@@ -3,8 +3,8 @@ jobs:
   build:
     docker:
       - image: node:10
-    working_directory: /test
+    working_directory: /app
     steps:
       - checkout
+      - run: npm install
       - run: npm test
-      - run: nyc report --reporter=text-lcov | coveralls
