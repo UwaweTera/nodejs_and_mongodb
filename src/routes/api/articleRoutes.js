@@ -17,6 +17,7 @@ router1.patch('/:id/update',passport.authenticate('jwt',{session: false}),checki
 //delete blogs
 router1.delete('/:id',passport.authenticate('jwt',{session: false}),checkingAdmin,deleteBlog);
 
+
 //add comments
 router1.post('/:id/comment',passport.authenticate('jwt',{session: false}),checkingUser,commVal,addComm)
 //read comment relate to post 
@@ -24,7 +25,7 @@ router1.get('/:id/comments',getComm)
 //read all comments
 router1.get('/comments',passport.authenticate('jwt',{session: false}),checkingAdmin, allComm)
 //delete comment
-router1.get('/:id/comments/:commId',passport.authenticate('jwt',{session: false}),checkingAdmin,delComment)
+router1.delete('/:id/comments/:commId',passport.authenticate('jwt',{session: false}),checkingAdmin,delComment)
 
 
 // add like 

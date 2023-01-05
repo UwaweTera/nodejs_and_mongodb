@@ -46,12 +46,13 @@ const getBlog = async()=>{
 }
 
 //for bad request
-const getBadBlog = ()=>{
-    return request(app).post('/blogs').set('Authorization','gf556h').send({
+const getBadBlog = async()=>{
+    const result = await request(app).post('/blogs').set('Authorization','gf556h').send({
         head: "Ipsum is simply dummy",
         image: "ji.jpg",
         body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
     })
+    return result
 }
 
 //Getting all blogs

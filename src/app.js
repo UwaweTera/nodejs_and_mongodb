@@ -14,7 +14,7 @@ app.use(cors())
 app.use(passport.initialize());
 app.use("/",router);
 
-try{
+
     mongoose.set('strictQuery', true);
     mongoose.connect(process.env.DBTESTURI,{useNewUrlParser: true}).then(()=>{
         console.log('connected to database')
@@ -22,8 +22,5 @@ try{
         console.log("This Error: ",err.message);
     })
 
-}catch(error){
-    console.log(error);
-}
 
 export default app
