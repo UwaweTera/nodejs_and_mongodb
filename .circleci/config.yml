@@ -2,9 +2,9 @@ version: 2
 jobs:
   build:
     docker:
-      - image: node:18.12.1
+      - image: circleci/node:18.12.1
     steps:
       - checkout
       - run: npm install
-      - run: npx jest
+      - run: npm test
       - run: nyc report --reporter=text-lcov | coveralls
