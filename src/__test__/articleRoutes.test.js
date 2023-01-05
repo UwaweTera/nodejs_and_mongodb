@@ -2,34 +2,7 @@ import request from "supertest";
 import app from "../app";
 import { Post } from "../model/articleMod";
 import { Signup } from "../model/registerMod";
-
-//getting admin token
-let adminToken = async()=>{
-    const user = await request(app).post('/user/adminsignup').send({
-        name: 'admin',
-        email: 'admin@gmail.com',
-        password: 'admin13535'
-    })
-    const adminLogin = await request(app).post('/user/login').send({
-        email: 'admin@gmail.com',
-        password: 'admin13535'
-    })
-    return 'Bearer ' + adminLogin.body;
-}
-
-//getting user token
-let userToken = async()=>{
-    const user = await request(app).post('/user/signup').send({
-        name: 'user',
-        email: 'user@gmail.com',
-        password: 'user3535'
-    })
-    const userLogin = await request(app).post('/user/login').send({
-        email: 'user@gmail.com',
-        password: 'user3535'
-    })
-    return 'Bearer ' + userLogin.body;
-}
+import { adminToken, userToken } from "./ref.test";
 
 beforeEach(async()=>{
     await Signup.deleteMany()
@@ -38,11 +11,12 @@ beforeEach(async()=>{
 //for good request
 const getBlog = async()=>{
     const token = await adminToken();
-    return request(app).post('/blogs').set('Authorization',token).send({
+    const result = await request(app).post('/blogs').set('Authorization',token).send({
         head: "Ipsum is simply dummy",
         image: "ji.jpg",
         body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
     })
+    return result
 }
 
 //for bad request
@@ -221,3 +195,4 @@ describe('testing like relate to blog',()=>{
     })
 })
  */
+

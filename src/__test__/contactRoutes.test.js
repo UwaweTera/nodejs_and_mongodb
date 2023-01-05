@@ -1,13 +1,8 @@
 import request from "supertest";
 import app from "../app";
-import Contact from "../model/messageMod";
-
-/* beforeEach(async()=>{
-    await Contact.deleteMany()
-})  */
 
 // sending message
-/* test('Testing for sending message', async()=>{
+ test('Testing for sending message', async()=>{
     const result = await request(app).post('/messages').send({
         name: "JohnDoe",
         email: "john@gmail.com",
@@ -15,6 +10,7 @@ import Contact from "../model/messageMod";
     })
     expect(result.statusCode).toBe(200)
 })
+
 //sending message by bad request
 test('Testing for sending message with bad request', async()=>{
     const result = await request(app).post('/messages').send({
@@ -24,7 +20,7 @@ test('Testing for sending message with bad request', async()=>{
     })
     expect(result.statusCode).toBe(400)
 })
-
+/*
 //getting all messages
 test('getting all messages',async()=>{
     const res = await request(app).get('/messages').set('Authorization',token);
