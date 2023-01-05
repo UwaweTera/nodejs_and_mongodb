@@ -6,6 +6,5 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: npx babel src --out-dir lib
       - run: npx jest
       - run: nyc report --reporter=text-lcov | coveralls

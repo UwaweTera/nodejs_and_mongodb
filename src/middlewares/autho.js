@@ -1,4 +1,4 @@
-import jwt  from "jsonwebtoken";
+import "dotenv/config";
 import {Signup} from "../model/registerMod";
 import bcrypt from 'bcryptjs';
 import passport from "passport";
@@ -9,27 +9,6 @@ import { Strategy as LocalStrategy}  from "passport-local";
 
 const SecretKey = process.env.JWT_SECRET;
 const userSecret = process.env.USER_SECRET;
-
-/* const verifyTokens = (req,res,next)=>{
-    //Create authorization header
-    const BearerHeader = req.headers['authorization'];
-    if (typeof BearerHeader !== 'undefined') {
-        //splite token
-        const token = BearerHeader.split(' ')[1];
-        //set token
-        jwt.verify(token,SecretKey,(error, decodedToken)=>{
-            if (error) {
-                res.status(401);
-                res.send('Login before. wrong token!');
-            }else{
-                next()
-            }
-        })
-    }else{
-        res.status(401);
-        res.send('Login before, no token')
-    }
-} */
 
 passport.use(
     new LocalStrategy(
