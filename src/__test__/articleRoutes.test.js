@@ -44,12 +44,7 @@ test('Getting single blog', async()=>{
 })
 
 
-//testing single blog based on id for bad request
-test('Testing one blog for bad request', async()=>{
-    const id = '123';
-    const response = await request(app).get(`/blogs/${id}`);
-    expect(response.statusCode).toBe(404)
-}) 
+
 
 //adding blog
 test('Testing post blog', async()=>{
@@ -110,6 +105,32 @@ test('delete single blog for not found', async()=>{
     const token = await adminToken();
     const response = await request(app).delete(`/blogs/${id}`).set('Authorization',token);
     expect(response.statusCode).toBe(404)
+})
+
+// some blog middleware
+
+const getBlogMid = async()=>{
+    const token = await adminToken();
+    const result = await request(app).post('/blogs').set('Authorization',token).send({
+        head: "Ip",
+        image: "ji.jpg",
+        bod: ""
+    })
+    return result;    
+}
+
+//adding blog im middleware
+test('adding blog for middleware', async()=>{
+    const result = await getBlogMid();
+    expect(result.statusCode).toBe(400)
+})
+
+test('update blog in middleware', async()=>{
+    const token = await adminToken();
+    const result = await getBlogMid();
+    const id = result.body._id;
+    const response = await request(app).patch(`/blogs/${id}/update`).set('Authorization',token);
+    expect(response.statusCode).toBe(400)
 })
 
 

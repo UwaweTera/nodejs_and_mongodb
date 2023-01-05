@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1672916649163" clover="3.2.0">
-  <project timestamp="1672916649163" name="All files">
-    <metrics statements="268" coveredstatements="201" conditionals="40" coveredconditionals="23" methods="35" coveredmethods="24" elements="343" coveredelements="248" complexity="0" loc="268" ncloc="268" packages="8" files="19" classes="19"/>
+<coverage generated="1672918935133" clover="3.2.0">
+  <project timestamp="1672918935134" name="All files">
+    <metrics statements="268" coveredstatements="203" conditionals="40" coveredconditionals="25" methods="35" coveredmethods="24" elements="343" coveredelements="252" complexity="0" loc="268" ncloc="268" packages="8" files="19" classes="19"/>
     <package name="src">
       <metrics statements="14" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="app.js" path="C:\Users\Andela\Documents\WEB DEVELOPMENT\ANDELA\NODEJS\test\src\app.js">
@@ -37,11 +37,11 @@
         <line num="31" count="1" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
         <line num="36" count="5" type="stmt"/>
-        <line num="37" count="2" type="stmt"/>
-        <line num="38" count="2" type="stmt"/>
-        <line num="39" count="2" type="stmt"/>
+        <line num="37" count="3" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="39" count="3" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
+        <line num="42" count="2" type="stmt"/>
         <line num="47" count="5" type="stmt"/>
         <line num="48" count="2" type="stmt"/>
         <line num="49" count="2" type="stmt"/>
@@ -158,19 +158,19 @@
         <line num="30" count="2" type="stmt"/>
         <line num="31" count="2" type="stmt"/>
         <line num="40" count="5" type="stmt"/>
-        <line num="41" count="15" type="stmt"/>
-        <line num="42" count="15" type="stmt"/>
+        <line num="41" count="18" type="stmt"/>
+        <line num="42" count="18" type="stmt"/>
         <line num="46" count="5" type="stmt"/>
-        <line num="47" count="15" type="stmt"/>
-        <line num="48" count="14" type="cond" truecount="1" falsecount="1"/>
+        <line num="47" count="18" type="stmt"/>
+        <line num="48" count="18" type="cond" truecount="1" falsecount="1"/>
         <line num="49" count="0" type="stmt"/>
-        <line num="53" count="14" type="stmt"/>
-        <line num="54" count="14" type="stmt"/>
-        <line num="61" count="14" type="stmt"/>
-        <line num="63" count="14" type="cond" truecount="2" falsecount="0"/>
-        <line num="64" count="4" type="stmt"/>
-        <line num="66" count="10" type="stmt"/>
-        <line num="67" count="10" type="stmt"/>
+        <line num="53" count="18" type="stmt"/>
+        <line num="54" count="18" type="stmt"/>
+        <line num="61" count="18" type="stmt"/>
+        <line num="63" count="18" type="cond" truecount="2" falsecount="0"/>
+        <line num="64" count="5" type="stmt"/>
+        <line num="66" count="13" type="stmt"/>
+        <line num="67" count="13" type="stmt"/>
         <line num="77" count="5" type="stmt"/>
         <line num="78" count="0" type="stmt"/>
         <line num="79" count="0" type="stmt"/>
@@ -183,18 +183,18 @@
       </file>
     </package>
     <package name="src.middlewares">
-      <metrics statements="56" coveredstatements="48" conditionals="22" coveredconditionals="14" methods="10" coveredmethods="10"/>
+      <metrics statements="56" coveredstatements="50" conditionals="22" coveredconditionals="16" methods="10" coveredmethods="10"/>
       <file name="articleMid.js" path="C:\Users\Andela\Documents\WEB DEVELOPMENT\ANDELA\NODEJS\test\src\middlewares\articleMid.js">
-        <metrics statements="15" coveredstatements="12" conditionals="6" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <metrics statements="15" coveredstatements="14" conditionals="6" coveredconditionals="5" methods="3" coveredmethods="3"/>
         <line num="5" count="5" type="stmt"/>
-        <line num="6" count="10" type="stmt"/>
-        <line num="7" count="10" type="cond" truecount="1" falsecount="1"/>
-        <line num="8" count="0" type="stmt"/>
+        <line num="6" count="12" type="stmt"/>
+        <line num="7" count="12" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="2" type="stmt"/>
         <line num="11" count="10" type="stmt"/>
         <line num="14" count="5" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
-        <line num="16" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="17" count="0" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="16" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="1" type="stmt"/>
         <line num="20" count="2" type="stmt"/>
         <line num="23" count="5" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
@@ -207,23 +207,23 @@
         <line num="10" count="5" type="stmt"/>
         <line num="11" count="5" type="stmt"/>
         <line num="34" count="5" type="stmt"/>
-        <line num="41" count="15" type="stmt"/>
-        <line num="42" count="15" type="cond" truecount="1" falsecount="1"/>
+        <line num="41" count="18" type="stmt"/>
+        <line num="42" count="18" type="cond" truecount="1" falsecount="1"/>
         <line num="43" count="0" type="stmt"/>
-        <line num="45" count="15" type="stmt"/>
-        <line num="46" count="15" type="cond" truecount="1" falsecount="1"/>
+        <line num="45" count="18" type="stmt"/>
+        <line num="46" count="18" type="cond" truecount="1" falsecount="1"/>
         <line num="47" count="0" type="stmt"/>
-        <line num="49" count="15" type="stmt"/>
+        <line num="49" count="18" type="stmt"/>
         <line num="54" count="5" type="stmt"/>
-        <line num="62" count="15" type="stmt"/>
-        <line num="63" count="15" type="cond" truecount="1" falsecount="1"/>
+        <line num="62" count="18" type="stmt"/>
+        <line num="63" count="18" type="cond" truecount="1" falsecount="1"/>
         <line num="64" count="0" type="stmt"/>
-        <line num="66" count="15" type="stmt"/>
+        <line num="66" count="18" type="stmt"/>
         <line num="73" count="5" type="stmt"/>
-        <line num="74" count="16" type="stmt"/>
-        <line num="75" count="16" type="cond" truecount="2" falsecount="0"/>
+        <line num="74" count="19" type="stmt"/>
+        <line num="75" count="19" type="cond" truecount="2" falsecount="0"/>
         <line num="76" count="1" type="stmt"/>
-        <line num="79" count="15" type="stmt"/>
+        <line num="79" count="18" type="stmt"/>
         <line num="84" count="5" type="stmt"/>
         <line num="85" count="3" type="stmt"/>
         <line num="86" count="3" type="cond" truecount="2" falsecount="0"/>
@@ -238,10 +238,10 @@
         <line num="6" count="0" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="10" count="5" type="stmt"/>
-        <line num="11" count="14" type="stmt"/>
-        <line num="12" count="14" type="cond" truecount="1" falsecount="1"/>
+        <line num="11" count="17" type="stmt"/>
+        <line num="12" count="17" type="cond" truecount="1" falsecount="1"/>
         <line num="13" count="0" type="stmt"/>
-        <line num="15" count="14" type="stmt"/>
+        <line num="15" count="17" type="stmt"/>
       </file>
       <file name="messageMid.js" path="C:\Users\Andela\Documents\WEB DEVELOPMENT\ANDELA\NODEJS\test\src\middlewares\messageMid.js">
         <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
