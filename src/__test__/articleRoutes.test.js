@@ -4,9 +4,9 @@ import { Post } from "../model/articleMod";
 import { Signup } from "../model/registerMod";
 import { adminToken, userToken } from "./ref.test";
 
-beforeEach(async()=>{
+/* beforeEach(async()=>{
     await Signup.deleteMany()
-})
+}) */
 
 //for good request
 const getBlog = async()=>{
@@ -175,7 +175,7 @@ test('Getting single blog comments', async()=>{
     expect(response.statusCode).toBe(404)
 })
   
-/* 
+
 //delete comment
 test('delete single comment', async()=>{
     const result = await getBlog();
@@ -186,15 +186,16 @@ test('delete single comment', async()=>{
         text: 'sjldlkfjalsjflasflsjfsdf'
     });
     const commId = comment.body._id;
-    console.log(`${id}/ ${commId}`)
-    const response = await request(app).delete(`/blogs/${id}/comments/${commId}`).set('Authorization',token);
+    const admintoken = await adminToken();
+    const response = await request(app).delete(`/blogs/${id}/comments/${commId}`).set('Authorization',admintoken);
     expect(response.statusCode).toBe(200)
 })
 
 //Adding like to blog by not found
     test('add like by not found',async()=>{
         const blogId = '1234';
-        const response = await request(app).put(`/blogs/${blogId}/like`).set('Authorization',userToken);
+        const token = await userToken();
+        const response = await request(app).put(`/blogs/${blogId}/like`).set('Authorization',token);
         expect(response.statusCode).toEqual(404)
         expect(response.body).toEqual('not found')
     })
@@ -215,5 +216,5 @@ describe('testing like relate to blog',()=>{
         expect(response.statusCode).toBe(404)
     })
 })
- */
+
 

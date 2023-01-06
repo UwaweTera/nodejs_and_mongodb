@@ -1,10 +1,11 @@
 import request from "supertest";
 import app from "../app";
 import { Signup } from "../model/registerMod";
+import { adminToken } from "./ref.test";
 
-beforeEach(async()=>{
+/* beforeEach(async()=>{
     await Signup.deleteMany()
-})
+}) */
 
 //signup to user
 test('user signup',async()=>{
@@ -34,4 +35,18 @@ test('admin signup',async()=>{
         password: 'admin3535'
     })
     expect(user.statusCode).toBe(200);
+})
+
+// get all admin
+test('get all admin registered', async()=>{
+    const token = await adminToken();
+    const result = await request(app).get('/user').set('Authorization',token);
+    expect(result.statusCode).toBe(200)
+})
+
+// delete user
+test('delete user', async()=>{
+    const token = await adminToken();
+    const result = await request(app).get('/user').set('Authorization',token);
+    expect(result.statusCode).toBe(200)
 })

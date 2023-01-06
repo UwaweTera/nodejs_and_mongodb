@@ -90,39 +90,4 @@ const deleteUser = async(req,res)=>{
     }
 }
 
-//Admin login
-/* 
-const login = async(req,res)=>{
-    const adminEmail = req.body.email;
-    const adminPin = req.body.password;
-    await Signup.findOne({email: adminEmail})
-        .then((user)=>{
-            
-            if (user) {
-                bcrypt.compare(adminPin,user.password, (error,result)=>{
-                    if(error){
-                     console.log(error)
-                    }
-                    if(result){
-                        let token = jwt.sign({
-                            id: user._id,
-                            name: user.name
-                        }, SecretKey , {expiresIn: '1h'});
-                        res.json({
-                            message: `${user.name}`,
-                            token
-                        })
-                    }else{
-                        res.status(401).json("password not matches")
-                    }
-                })
-            }else{
-                res.status(401).json('unknown data, please make signup')
-            }
-        }).catch((error)=>{
-            res.status(500).send('Server problem')
-        })
-}  */
-
-
 export {UserRegistration, userLogin,register,signedIn,deleteUser}

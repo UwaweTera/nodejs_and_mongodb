@@ -219,6 +219,5 @@ const getLike = async(req,res)=>{
     } catch (error) {
         res.status(404).json('like not found')
     }
-
 }
 export {addBlog,getBlogs,getBlogById,updateBlog,deleteBlog,addComm,getComm,allComm,delComment,like,getLike}

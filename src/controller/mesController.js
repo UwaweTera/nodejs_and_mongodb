@@ -16,8 +16,8 @@ const ContactContr = async (req,res)=>{
         const insContact = new Contact({
             name,email,message
         })
-        await insContact.save()
-        res.status(200).send('Message sent');
+        const result = await insContact.save();
+        res.status(200).send(result);
 } 
 
 //get all message
