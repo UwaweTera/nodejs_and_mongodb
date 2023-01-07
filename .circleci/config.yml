@@ -11,6 +11,7 @@ jobs:
           name: download dependency
           environment: 
             USER_SECRET: USER_SECRET
-          command: npm ci && make test-coverage
+          command: npm ci 
+      - run : npm install && make test-coverage
       - run: npm test
       - coveralls/upload
