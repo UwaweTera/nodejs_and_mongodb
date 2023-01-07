@@ -7,15 +7,10 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
-      - coveralls/upload:
-          requires:
-            - test
-          coverage:
-            paths:
-              - coverage/*
       - run:
           name: download dependency
           environment: 
             USER_SECRET: USER_SECRET
-          command: npm ci
+          command: npm ci && make test-coverage
       - run: npm test
+      - coveralls/upload
