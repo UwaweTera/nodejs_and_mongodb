@@ -1,12 +1,13 @@
 version: 2.1
-orbs:
-  coveralls: coveralls/coveralls@1.0.6
 jobs:
   build:
     docker:
       - image: circleci/node:latest
     steps:
       - checkout
-      - run : npm install && make test-coverage
+      - run:
+          name: download dependency
+          environment: 
+            USER_SECRET: USER_SECRET
+          command: npm ci
       - run: npm test
-      - coveralls/upload
