@@ -5,5 +5,9 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
-      - run: npm install
+      - run:
+          name: download dependency
+          environment: 
+            USER_SECRET: USER_SECRET
+          command: npm ci
       - run: npm test
