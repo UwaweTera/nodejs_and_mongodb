@@ -2,9 +2,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node@5.0.2
+      - image: circleci/node:18.12.1
     steps:
       - checkout
-      - run: npm install
-      - run: npm test
-      - run: nyc report --reporter=text-lcov | coveralls
+      - run: 
+          name: Install dependencies
+          commands: |
+            npm install
+      - run:
+          name: Run tests
+          commands: |
+            npm test
