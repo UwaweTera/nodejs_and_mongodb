@@ -2,18 +2,8 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:10.15.3
+      - image: circleci/node:10
     steps:
       - checkout
-      - run: 
-          name: Install dependencies
-          commands: |
-            npm install
-      - run:
-          name: Run tests
-          commands: |
-            npm test
-      - store_test_result:
-          path: test_results
-      - store_artifacts:
-          path: test_results
+      - run: npm install
+      - run: npm test
