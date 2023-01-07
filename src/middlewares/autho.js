@@ -1,4 +1,3 @@
-import "dotenv/config";
 import {Signup} from "../model/registerMod";
 import bcrypt from 'bcryptjs';
 import passport from "passport";
@@ -9,7 +8,6 @@ import { Strategy as LocalStrategy}  from "passport-local";
 
 const SecretKey = process.env.JWT_SECRET;
 const userSecret = process.env.USER_SECRET;
-
 passport.use(
     new LocalStrategy(
       {
