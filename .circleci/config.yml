@@ -7,6 +7,6 @@ jobs:
       - image: circleci/node:latest
     steps:
       - checkout
-      - run : make test-coverage
+      - run : npm install && make test-coverage
       - run: npm test
       - coveralls/upload
