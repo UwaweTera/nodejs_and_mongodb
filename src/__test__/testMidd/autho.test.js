@@ -1,5 +1,11 @@
 import request from "supertest";
 import app from "../../app";
+import { Signup } from "../model/registerMod";
+const SECONDS = 1000;
+jest.setTimeout(70 * SECONDS)
+beforeEach(async()=>{
+    await Signup.deleteMany()
+})
 
 const getUser = ()=>{
     return request(app).post('/user/signup').send({
