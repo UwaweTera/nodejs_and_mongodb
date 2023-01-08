@@ -7,7 +7,5 @@ jobs:
       - checkout
       - run:
           name: download dependency
-          environment: 
-            USER_SECRET: USER_SECRET
-          command: npm ci
+          command: npm install
       - run: npm test

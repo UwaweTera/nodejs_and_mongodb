@@ -2,7 +2,7 @@ import request from "supertest";
 import app from "../app";
 import { adminToken, userToken } from "./ref.test";
 import { Signup } from "../model/registerMod";
-
+import { Post } from "../model/articleMod";
 beforeEach(async()=>{
     await Signup.deleteMany()
 })

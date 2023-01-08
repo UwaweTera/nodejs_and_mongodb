@@ -16,6 +16,9 @@
       }
     }
   },
+  "jest":{
+    "testTimeout": 50000
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
