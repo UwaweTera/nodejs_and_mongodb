@@ -3,11 +3,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest
+    environment: 
+        USER_SECRET: USER_SECRET
     steps:
       - checkout
-      - run:
-          name: download dependency
-          environment: 
-            USER_SECRET: USER_SECRET
-          command: npm ci
+      - run: npm install
       - run: npm test
