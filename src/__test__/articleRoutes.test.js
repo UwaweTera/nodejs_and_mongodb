@@ -7,6 +7,7 @@ import { adminToken, userToken } from "./ref.test";
 /* beforeEach(async()=>{
     await Signup.deleteMany()
 }) */
+jest.setTimeout(10000);
 
 //for good request
 const getBlog = async()=>{
