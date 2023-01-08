@@ -20,7 +20,10 @@ const blogSchema = new Schema({
         ref : 'Comment'
     }],
     likes: {
-        count: Number,
+        count: {
+          type: Number,
+          default: 0  
+        },
         Peaples: []
     }
 

@@ -5,9 +5,8 @@ import { Signup } from "../model/registerMod";
 import { adminToken, userToken } from "./ref.test";
 
 /* beforeEach(async()=>{
-    await Signup.deleteMany()
+    jest.setTimeout(20000);
 }) */
-jest.setTimeout(10000);
 
 //for good request
 const getBlog = async()=>{

@@ -205,7 +205,8 @@ const like = async(req,res)=>{
             res.status(200).json('like removed')
         }
     } catch (error) {
-        res.status(404).json('not found')
+        console.log(error)
+        res.status(404).json('blog like not found')
     }
 }
 

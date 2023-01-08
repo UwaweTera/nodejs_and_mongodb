@@ -17,8 +17,11 @@ app.use("/",router);
 const connect = ()=>{
     try {
         mongoose.set('strictQuery', true);
-        mongoose.connect(process.env.DBTESTURI,{useNewUrlParser: true, useUnifiedTopology: true})
-        console.log('connected to database')
+        mongoose.connect(process.env.REMOTEDB,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
+            console.log('connected to database')
+        }).catch((err)=>{
+            console.log("This Error: ",err.message);
+        })
     } catch (error) {
         console.log(error)
     }

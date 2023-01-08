@@ -4,7 +4,7 @@ import { Signup } from "../model/registerMod";
 import { adminToken } from "./ref.test";
 
 /* beforeEach(async()=>{
-    await Signup.deleteMany()
+    jest.setTimeout(20000);
 }) */
 
 //signup to user

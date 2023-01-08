@@ -3,7 +3,8 @@ import app from "../app";
 import { adminToken, userToken } from "./ref.test";
 import { Signup } from "../model/registerMod";
 
-beforeEach(async()=>{
+beforeAll(async()=>{
+    // jest.setTimeout(10000);
     await Signup.deleteMany()
 })
 
