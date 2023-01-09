@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1673225118318" clover="3.2.0">
-  <project timestamp="1673225118318" name="All files">
-    <metrics statements="265" coveredstatements="222" conditionals="40" coveredconditionals="28" methods="36" coveredmethods="29" elements="341" coveredelements="279" complexity="0" loc="265" ncloc="265" packages="8" files="19" classes="19"/>
+<coverage generated="1673230978779" clover="3.2.0">
+  <project timestamp="1673230978780" name="All files">
+    <metrics statements="265" coveredstatements="223" conditionals="40" coveredconditionals="27" methods="36" coveredmethods="30" elements="341" coveredelements="280" complexity="0" loc="265" ncloc="265" packages="8" files="19" classes="19"/>
     <package name="src">
       <metrics statements="11" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
       <file name="app.js" path="C:\Users\Andela\Documents\WEB DEVELOPMENT\ANDELA\NODEJS\test\src\app.js">
@@ -20,7 +20,7 @@
       </file>
     </package>
     <package name="src.controller">
-      <metrics statements="148" coveredstatements="111" conditionals="18" coveredconditionals="10" methods="23" coveredmethods="18"/>
+      <metrics statements="148" coveredstatements="113" conditionals="18" coveredconditionals="10" methods="23" coveredmethods="19"/>
       <file name="artController.js" path="C:\Users\Andela\Documents\WEB DEVELOPMENT\ANDELA\NODEJS\test\src\controller\artController.js">
         <metrics statements="95" coveredstatements="69" conditionals="10" coveredconditionals="4" methods="13" coveredmethods="10"/>
         <line num="10" count="5" type="stmt"/>
@@ -140,23 +140,23 @@
         <line num="38" count="0" type="stmt"/>
       </file>
       <file name="regController.js" path="C:\Users\Andela\Documents\WEB DEVELOPMENT\ANDELA\NODEJS\test\src\controller\regController.js">
-        <metrics statements="36" coveredstatements="31" conditionals="8" coveredconditionals="6" methods="7" coveredmethods="6"/>
+        <metrics statements="36" coveredstatements="33" conditionals="8" coveredconditionals="6" methods="7" coveredmethods="7"/>
         <line num="8" count="5" type="stmt"/>
         <line num="9" count="5" type="stmt"/>
         <line num="12" count="5" type="stmt"/>
-        <line num="13" count="4" type="stmt"/>
-        <line num="15" count="4" type="stmt"/>
-        <line num="16" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="15" count="5" type="stmt"/>
+        <line num="16" count="5" type="cond" truecount="1" falsecount="1"/>
         <line num="17" count="0" type="stmt"/>
-        <line num="19" count="4" type="stmt"/>
-        <line num="25" count="4" type="stmt"/>
-        <line num="27" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="5" type="stmt"/>
+        <line num="25" count="5" type="stmt"/>
+        <line num="27" count="5" type="cond" truecount="2" falsecount="0"/>
         <line num="28" count="3" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
         <line num="40" count="5" type="stmt"/>
-        <line num="41" count="22" type="stmt"/>
-        <line num="42" count="22" type="stmt"/>
+        <line num="41" count="23" type="stmt"/>
+        <line num="42" count="23" type="stmt"/>
         <line num="46" count="5" type="stmt"/>
         <line num="47" count="21" type="stmt"/>
         <line num="48" count="21" type="cond" truecount="1" falsecount="1"/>
@@ -169,8 +169,8 @@
         <line num="66" count="4" type="stmt"/>
         <line num="67" count="4" type="stmt"/>
         <line num="77" count="5" type="stmt"/>
-        <line num="78" count="0" type="stmt"/>
-        <line num="79" count="0" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
         <line num="83" count="5" type="stmt"/>
         <line num="84" count="1" type="stmt"/>
         <line num="85" count="1" type="stmt"/>
@@ -180,7 +180,7 @@
       </file>
     </package>
     <package name="src.middlewares">
-      <metrics statements="56" coveredstatements="52" conditionals="22" coveredconditionals="18" methods="10" coveredmethods="10"/>
+      <metrics statements="56" coveredstatements="51" conditionals="22" coveredconditionals="17" methods="10" coveredmethods="10"/>
       <file name="articleMid.js" path="C:\Users\Andela\Documents\WEB DEVELOPMENT\ANDELA\NODEJS\test\src\middlewares\articleMid.js">
         <metrics statements="15" coveredstatements="14" conditionals="6" coveredconditionals="5" methods="3" coveredmethods="3"/>
         <line num="5" count="5" type="stmt"/>
@@ -200,32 +200,32 @@
         <line num="29" count="2" type="stmt"/>
       </file>
       <file name="autho.js" path="C:\Users\Andela\Documents\WEB DEVELOPMENT\ANDELA\NODEJS\test\src\middlewares\autho.js">
-        <metrics statements="25" coveredstatements="23" conditionals="10" coveredconditionals="8" methods="4" coveredmethods="4"/>
+        <metrics statements="25" coveredstatements="22" conditionals="10" coveredconditionals="7" methods="4" coveredmethods="4"/>
         <line num="9" count="5" type="stmt"/>
         <line num="10" count="5" type="stmt"/>
         <line num="11" count="5" type="stmt"/>
         <line num="18" count="23" type="stmt"/>
-        <line num="19" count="23" type="cond" truecount="2" falsecount="0"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="22" count="22" type="stmt"/>
-        <line num="23" count="22" type="cond" truecount="1" falsecount="1"/>
+        <line num="19" count="23" type="cond" truecount="1" falsecount="1"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="23" type="stmt"/>
+        <line num="23" count="23" type="cond" truecount="1" falsecount="1"/>
         <line num="24" count="0" type="stmt"/>
-        <line num="26" count="22" type="stmt"/>
+        <line num="26" count="23" type="stmt"/>
         <line num="31" count="5" type="stmt"/>
-        <line num="39" count="22" type="stmt"/>
-        <line num="40" count="22" type="cond" truecount="1" falsecount="1"/>
+        <line num="39" count="23" type="stmt"/>
+        <line num="40" count="23" type="cond" truecount="1" falsecount="1"/>
         <line num="41" count="0" type="stmt"/>
-        <line num="43" count="22" type="stmt"/>
+        <line num="43" count="23" type="stmt"/>
         <line num="50" count="5" type="stmt"/>
         <line num="51" count="22" type="stmt"/>
         <line num="52" count="22" type="cond" truecount="2" falsecount="0"/>
         <line num="53" count="1" type="stmt"/>
         <line num="56" count="21" type="stmt"/>
         <line num="61" count="5" type="stmt"/>
-        <line num="62" count="5" type="stmt"/>
-        <line num="63" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="62" count="6" type="stmt"/>
+        <line num="63" count="6" type="cond" truecount="2" falsecount="0"/>
         <line num="64" count="1" type="stmt"/>
-        <line num="67" count="4" type="stmt"/>
+        <line num="67" count="5" type="stmt"/>
       </file>
       <file name="checkUser.js" path="C:\Users\Andela\Documents\WEB DEVELOPMENT\ANDELA\NODEJS\test\src\middlewares\checkUser.js">
         <metrics statements="10" coveredstatements="9" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
@@ -235,10 +235,10 @@
         <line num="6" count="0" type="stmt"/>
         <line num="8" count="3" type="stmt"/>
         <line num="10" count="5" type="stmt"/>
-        <line num="11" count="19" type="stmt"/>
-        <line num="12" count="19" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="20" type="stmt"/>
+        <line num="12" count="20" type="cond" truecount="2" falsecount="0"/>
         <line num="13" count="1" type="stmt"/>
-        <line num="15" count="18" type="stmt"/>
+        <line num="15" count="19" type="stmt"/>
       </file>
       <file name="messageMid.js" path="C:\Users\Andela\Documents\WEB DEVELOPMENT\ANDELA\NODEJS\test\src\middlewares\messageMid.js">
         <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>

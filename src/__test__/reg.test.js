@@ -65,6 +65,7 @@ test('delete user', async()=>{
     const user = await getUser();
     const id = user.body._id;
     const token = await adminToken();
+    console.log(token)
     const result = await request(app).delete(`/user/${id}`).set('Authorization',token);
     expect(result.statusCode).toBe(200)
 })
