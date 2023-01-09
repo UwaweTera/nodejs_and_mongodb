@@ -3,9 +3,9 @@ import app from "../app";
 import { adminToken, userToken } from "./ref.test";
 import { Signup } from "../model/registerMod";
 import { Post } from "../model/articleMod";
-/* beforeAll(async()=>{
+beforeAll(async()=>{
     await Signup.deleteMany()
-}) */
+})
 
 // sending message
  test('Testing for sending message', async()=>{

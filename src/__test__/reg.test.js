@@ -4,9 +4,9 @@ import app from "../app";
 import { Signup } from "../model/registerMod";
 import { adminToken } from "./ref.test";
 
-beforeEach(async()=>{
+/* beforeEach(async()=>{
     await Signup.deleteMany()
-})
+}) */
 
 const newUser = {
     name: 'John',

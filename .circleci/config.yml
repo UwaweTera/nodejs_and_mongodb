@@ -8,4 +8,7 @@ jobs:
       - run:
           name: download dependency
           command: npm install
-      - run: npm test
+      - run:
+        name: run test
+        command: npm test
+       
