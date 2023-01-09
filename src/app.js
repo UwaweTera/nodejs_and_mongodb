@@ -6,13 +6,9 @@ import session from 'express-session';
 import router2 from './routes/contactRoutes';
 import router3 from './routes/regRoutes';
 
-const port = process.env.PORT;
-const dbURL = process.env.DBURL;
-try{
-    mongoose.set('strictQuery', true);
-    mongoose.connect(dbURL,{useNewUrlParser: true}).then(()=>{
-        const app = express();
-        app.use("/",router);
+
+const app = express();
+app.use("/",router);
         app.use('/',router2);
         app.use('/',router3);
         app.use(express.json());
@@ -21,7 +17,11 @@ try{
             resave: false,
             saveUninitialized: true
         }))
-        app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: false}));
+const port = process.env.PORT;
+try{
+    mongoose.set('strictQuery', true);
+    mongoose.connect(process.env.REMOTEDB,{useNewUrlParser: true}).then(()=>{
         app.listen(port,()=>{
             console.log(`The server is running on: ${port}`);
         })
