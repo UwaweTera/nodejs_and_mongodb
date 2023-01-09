@@ -64,7 +64,7 @@ const userLogin = async(req,res)=>{
             res.status(400).json('already there')
         }else{
             enterUser.save()
-            res.json('complite signup')
+            res.json(enterUser)
         }
 
     })

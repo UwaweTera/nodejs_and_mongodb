@@ -14,19 +14,12 @@ app.use(cors())
 app.use(passport.initialize());
 app.use("/",router);
 
-const connect = ()=>{
-    try {
-        mongoose.set('strictQuery', true);
-        mongoose.connect(process.env.REMOTEDB,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
-            console.log('connected to database')
-        }).catch((err)=>{
-            console.log(err)
-        })
-        
-    } catch (error) {
-        console.log(error)
-    }
-}
-connect()
+    mongoose.set('strictQuery', true);
+    mongoose.connect(process.env.REMOTEDB,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
+        console.log('connected to database')
+    }).catch((err)=>{
+        console.log(err)
+    })
+
 
 export default app
