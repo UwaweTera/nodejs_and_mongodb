@@ -48,5 +48,4 @@ regSchema.path('email').validate(async (email)=>{
 
 //create contact model
 const Signup = mongoose.model("Signup",regSchema);
-
 export {UserReg, Signup}

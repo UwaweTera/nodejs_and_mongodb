@@ -1,4 +1,4 @@
-import authContact from "../validater/messageVal";
+import authContact from "../validater/messageVal.js";
 
 //contact validation
 const contVal = async(req, res,next)=>{

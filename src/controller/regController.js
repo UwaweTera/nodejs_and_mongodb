@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 import bcrypt from 'bcryptjs';
-import {UserReg, Signup} from "../model/registerMod";
+import {UserReg, Signup} from "../model/registerMod.js";
 import session from 'express-session';
 
 

@@ -1,10 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import "dotenv/config";
-import router from './src/routes/articleRoutes';
+import router from './src/routes/articleRoutes.js';
 import session from 'express-session';
-import router2 from './src/routes/contactRoutes';
-import router3 from './src/routes/regRoutes';
+import router2 from './src/routes/contactRoutes.js';
+import router3 from './src/routes/regRoutes.js';
 
 
 const app = express();

@@ -1,11 +1,6 @@
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import mongoose from "mongoose";
 import 'dotenv/config';
-import UserReg from "../model/registerMod";
-import Contact from "../model/messageMod";
-import session from 'express-session';
-
+import Contact from "../model/messageMod.js";
 
 
 //send message

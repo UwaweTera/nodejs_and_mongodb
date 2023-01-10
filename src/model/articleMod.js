@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import UserReg from "./registerMod";
 
 const Schema =  mongoose.Schema;
 

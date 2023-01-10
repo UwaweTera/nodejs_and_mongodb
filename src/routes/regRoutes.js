@@ -1,6 +1,6 @@
 import  express  from "express";
-import {verifyTokens, verifyUserTokens,UserVald,loginVald,signupVald} from "../middlewares/autho";
-import {UserRegistration, userLogin,register,signedIn, login}  from "../controller/regController";
+import {verifyTokens,UserVald,signupVald} from "../middlewares/autho.js";
+import {UserRegistration, userLogin,register,signedIn, login}  from "../controller/regController.js";
 const router3 = express.Router();
 
 //User registration

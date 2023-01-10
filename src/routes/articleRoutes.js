@@ -1,10 +1,8 @@
 import  express  from "express";
-import {Post, Comment, Like} from "../model/articleMod";
-import Contact from "../model/messageMod";
-import {verifyTokens , verifyUserTokens} from "../middlewares/autho";
-import {blogVal,updateVal,commVal/* ,contVal, signupVald,UserVald */} from "../middlewares/articleMid";
-import {addBlog,getBlogs,getBlogById,updateBlog,deleteBlog,addComm,allComm,getComm,delComment,like,getLike} from "../controller/artController";
-import {UserRegistration, userLogin}  from "../controller/regController";
+import {verifyTokens , verifyUserTokens} from "../middlewares/autho.js";
+import {blogVal,updateVal,commVal/* ,contVal, signupVald,UserVald */} from "../middlewares/articleMid.js";
+import {addBlog,getBlogs,getBlogById,updateBlog,deleteBlog,addComm,allComm,getComm,delComment,like,getLike} from "../controller/artController.js";
+
 const router = express.Router();
 
 //get all blogs

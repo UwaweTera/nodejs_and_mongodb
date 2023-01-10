@@ -1,5 +1,5 @@
-import authContact from "../routes/contactRoutes"
-import {commentVal,blogValidation,blogUpdVal} from "../validater/articleVal";
+import authContact from "../routes/contactRoutes.js"
+import {commentVal,blogValidation,blogUpdVal} from "../validater/articleVal.js";
 
 
 //blog validation

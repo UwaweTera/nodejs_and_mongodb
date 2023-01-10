@@ -2,8 +2,8 @@
 import jwt from 'jsonwebtoken';
 import mongoose from "mongoose";
 import 'dotenv/config';
-import {Post, Comment, Like} from "../model/articleMod";
-import UserReg from "../model/registerMod";
+import {Post, Comment, Like} from "../model/articleMod.js";
+import UserReg from "../model/registerMod.js";
 import session from 'express-session';
 
 
