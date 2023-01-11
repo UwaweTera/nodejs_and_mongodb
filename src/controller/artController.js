@@ -71,7 +71,6 @@ const updateBlog = async(req,res)=>{
         res.status(200).send(post)
         
     }catch(error){
-        console.log(error)
         res.status(404).json({error: "blog doesn't exit"});
     }
     

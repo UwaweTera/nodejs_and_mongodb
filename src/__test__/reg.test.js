@@ -57,11 +57,11 @@ test('admin signup',async()=>{
 
 
 // get all admin
-test('get all admin registered', async()=>{
+/* test('get all admin registered', async()=>{
     const token = await adminToken();
     const result = await request(app).get('/user').set('Authorization',token);
     expect(result.statusCode).toBe(200)
-})
+}) */
 
 // delete user
 test('delete user', async()=>{

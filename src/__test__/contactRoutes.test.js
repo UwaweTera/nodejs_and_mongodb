@@ -7,6 +7,9 @@ beforeAll(async()=>{
     await Signup.deleteMany()
 })
 
+afterAll(async()=>{
+    await Post.deleteMany();
+})
 // sending message
  test('Testing for sending message', async()=>{
     const result = await request(app).post('/messages').send({
