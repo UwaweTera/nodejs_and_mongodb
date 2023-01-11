@@ -1,57 +1,42 @@
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import mongoose from "mongoose";
 import 'dotenv/config';
-import Contact from "../model/messageMod.js";
+import UserReg from "../model/registerMod";
+import Contact from "../model/messageMod";
+import session from 'express-session';
 
+//some global variable
+const SecretKey = process.env.JWT_SECRET;
+const userSecret = process.env.USER_SECRET;
 
 //send message
 const ContactContr = async (req,res)=>{
-    const {name,email,message} = req.body   
-    const insContact = new Contact({
-        name,email,message
-   })
-   await insContact.save().then((result)=>{
-    res.send(result);
-   }).catch((error)=>{ res.send({message: 'fail to save blog'}); console.log(error)})
+        const {name,email,message} = req.body   
+        const insContact = new Contact({
+            name,email,message
+        })
+        const result = await insContact.save();
+        res.status(200).send(result);
 } 
+
 //get all message
 const messages = async(req, res)=>{
-    jwt.verify(req.token, SecretKey, async(err,authoData)=>{
-        if(err){
-            res.send('Login before you view all messages')
-        }else{
-            await Contact.find()
-            .then((result)=>{
-                if(result === ""){
-                    res.send({message: "empty"})
-                }else{
-                    res.send(result)
-                }
-                
-            })
-            .catch((error)=>{ console.log(error)})
-        }
-    })
+        let getMessage = await Contact.find();
+        res.status(200);
+        res.send(getMessage)
    
 }
 
 //delete message
 const deleteMsg = async(req,res)=>{
-    
-    try {
-        jwt.verify(req.token, SecretKey, async(err,authoData)=>{
-            if(err){
-                res.send('Login first')
-            }else{
+        try {
                 const id = req.params.id;
                 await Contact.deleteOne({_id: id});
-                res.status(200).json({message: "message deleted"})
-            }
-        })
-      
-    } catch(error){
-        res.status(404).json({error: "That id doesn't exist"});
-    }
+                res.status(200).json("message deleted")
+        } catch (error) {
+                res.status(404).json('not found on delete')       
+        }
 } 
-
 
 export {ContactContr,messages,deleteMsg}

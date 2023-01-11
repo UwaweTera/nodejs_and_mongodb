@@ -1,3 +1,4 @@
+import { number } from "joi";
 import mongoose from "mongoose";
 
 const Schema =  mongoose.Schema;
@@ -19,10 +20,13 @@ const blogSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref : 'Comment'
     }],
-    likes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref : 'Like'
-    }]
+    likes: {
+        count: {
+            type: Number,
+            default: 0
+        },
+        Peaples: []
+    }
 
 });
 

@@ -1,106 +1,89 @@
 
-import jwt from 'jsonwebtoken';
 import mongoose from "mongoose";
 import 'dotenv/config';
-import {Post, Comment, Like} from "../model/articleMod.js";
-import UserReg from "../model/registerMod.js";
+import {Post, Comment, Like} from "../model/articleMod";
 import session from 'express-session';
+import { Signup } from "../model/registerMod";
 
 
 //some global variable
 const SecretKey = process.env.JWT_SECRET;
 const userSecret = process.env.USER_SECRET;
 
+
+
 //adding blog post
 const addBlog =async (req,res)=>{
-    jwt.verify(req.token, SecretKey ,async(err, authoData)=>{
-        if(err){
-            res.send('login before add blog');
-        }else{
-            const insBlog = new Post({
-                head: req.body.header,
-                image: req.body.img,
-                body: req.body.content,
-                comment: [],
-                likeCount: 0
-           })
-           await insBlog.save().then((result)=>{
-            res.json({
-                message: "blog created"
-            })
-           }).catch((error)=>{ res.send({message: 'fail to save blog'}); console.log(error)})
-        }
-    })
-   
+    try {
+        const {head,image,body} = req.body;
+        const insBlog = new Post({
+            head,
+            image,
+            body
+        })
+        const blog = await insBlog.save();
+        res.status(200).json(blog)
+    } catch (error) {
+        res.status(500).json('Server Error. try to add blog later')
+    }
+      
 }
+
+
+
 
 //get all blogs
 
 const getBlogs = async(req, res)=>{
-    await Post.find().populate(["comments", "likes"])
-        .then((result)=>{
-            if(result){
-                res.send(result)
-            }else{
-                res.json({
-                    message: "no blog there"
-                })
-            }
-            
-        })
-        .catch((error)=>{ console.log(error)})
+        try {
+            let allBlogs = await Post.find().populate('comments')
+            res.status(200).send(allBlogs);   
+        } catch (error) {
+            res.status(500).json('Server Error. try to add blog later')
+        }
+        
 }
 
 //Get blogs by id
 const getBlogById = async(req, res)=>{
-    const id = req.params.id;
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).json({message : "no blog by that id"})
-    await Post.findById(id)
-        .then((result)=>{res.send(result)})
-        .catch((error)=>{ console.log(error)})
+    try {
+        const id = req.params.id;
+        let allBlogs = await Post.findById(id).populate('comments');
+        res.status(200).json(allBlogs);
+    } catch{
+        res.status(404).json('no blog found')
+    }    
 }
 
 //Update blog
-const updateBlog = (req,res)=>{
+const updateBlog = async(req,res)=>{
     try{
-        jwt.verify(req.token, SecretKey ,async(err, authoData)=>{
-            if(err){
-                res.send('login before update blog');
-            }else{
-                const id = req.params.id;
-                if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).json({message : "no blog by that id"})
-                const post = await Post.findOne({_id: id});
+        const id = req.params.id;
+        const post = await Post.findOne({_id: id});
+        if(req.body.head){
+            post.head = req.body.head;
+        }
+        if(req.body.image){
+            post.image = req.body.image;
+        }
+        if(req.body.body){
+            post.body = req.body.body;
+        }
+        await post.save()
+        res.status(200).send(post)
         
-                if(req.body.header){
-                    post.head = req.body.header;
-                }
-                if(req.body.img){
-                    post.image = req.body.img;
-                }
-                if(req.body.content){
-                    post.body = req.body.content;
-                }
-                await post.save()
-                res.send(post)
-            }
-        })
-        
-    }catch{
+    }catch(error){
+        console.log(error)
         res.status(404).json({error: "blog doesn't exit"});
     }
     
 }
 //Delete blog
-const deleteBlog = (req,res)=>{
+const deleteBlog = async(req,res)=>{
     try{
-        jwt.verify(req.token, SecretKey, async(err,authoData)=>{
-            if(err){
-                res.send('Login before delete blog')
-            }else{
-                await Post.deleteOne({_id: req.params.id});
-                res.status(200).json({msg: 'blog deleted'});
-            }
-        })        
+        let id = req.params.id;
+        await Post.deleteOne({_id: id});
+        res.status(200).json({msg: 'blog deleted'});          
     }catch{
         res.status(404).json({error: "port doesn't exist"});
     }
@@ -108,159 +91,146 @@ const deleteBlog = (req,res)=>{
 
 //add comment to specified blog
 const addComm = async(req,res)=>{
-    jwt.verify(req.token, userSecret, async(err,authoData)=>{
-        if(err){
-            res.send('Login as user first')
-        }else{
-            const id = req.params.id;
-            if(session.userId){
-                const UserId = session.userId;
-                const user = await UserReg.findById(UserId);
-                const name = user.name; 
-                const email = user.email; 
-                const text = req.body.text; 
-                const comment = new Comment({
-                    name,
-                    email,
-                    text,
-                    blogId: id
-                });
-                await comment.save();
-                const specifiedBlog = await Post.findById(id).populate('comments')
-                specifiedBlog.comments.push(comment);
-                specifiedBlog.save().then((result)=>{
-                    res.json({messages: result})
-                }).catch((err)=>{
-                    res.send(err)
-                })
-            }else{
-                res.send('plese make login')
-            }
-            
-        }
-    }) 
 
+    try {
+        const id = req.params.id;
+        let user = await Signup.findOne({_id: req.user._id});
+        const name = user.name;
+        const email = user.email; 
+        const text = req.body.text; 
+        const comment = new Comment({
+            name,
+            email,
+            text,
+            blogId: id
+        });
+        await comment.save()
+        const specifiedBlog = await Post.findById(id).populate('comments')
+        specifiedBlog.comments.push(comment);
+        specifiedBlog.save()
+        res.status(200).json(comment)     
+    } catch (error) {
+        res.status(500);
+        res.json('Server error')
+    }
 }
-//read all comments
-const allComm = (req,res)=>{
-    jwt.verify(req.token, SecretKey, async(err,authoData)=>{
-        if(err){
-            res.send('Login before read all comments')
-        }else{
-            await Comment.find()
-            .then((result)=>{
-                if(result){
-                    res.status(200).json(result)
-                }
-            }).catch((err)=>{
-                res.status(404).json({error: "not found"})
-            })
+/* const addComm = async(req,res)=>{
+
+    try {
+        const id = req.params.id;
+        const user_id = session.userId;
+        if(user_id){
+            const UserId = session.userId;
+            let user = await UserReg.findById(UserId);
+            res.send(user_id);
+            const name = user.name;
+            const email = user.email; 
+            const text = req.body.text; 
+            
+            const specifiedBlog = await Post.findOne({_id: req.params.id})
+            const comment = new Comment({
+                name: req.body.name,
+                email: req.body.email,
+                text: req.body.text
+            });
+            specifiedBlog.comments.push(comment);
+            await specifiedBlog.save();
+            res.send(specifiedBlog)
         }
-    })
-    
+    } catch (error) {
+        res.status(401);
+        res.send('plese make login')
+    }
+
+} */
+
+//read all comments
+const allComm = async(req,res)=>{
+        const result = await Comment.find();
+        res.status(200).json(result)
 }
+
 
 //read comment to specified blog
 const getComm = async(req,res)=>{
-    const id = req.params.id;
-    
-    await Post.findById(id).populate('comments')
-        .then((result)=>{
-            if(result){
-                res.status(200).json(result.comments)
-            }
-        }).catch((err)=>{
-            res.status(404).json({error: "not found"})
-        })
+    try {
+        const id = req.params.id;
+        const allComment = await Post.findById(id).populate('comments');
+        if(allComment.comments.length > 0){
+            res.status(200).json(allComment.comments);
+        }else{
+            res.status(200).json('0 comment');
+        }
+
+    } catch (error) {
+
+        res.status(404).json({error})
+    }
+   
 }
 
 //delete comment 
-const delComment =(req,res)=>{
+const delComment = async(req,res)=>{
     
     try {
-        jwt.verify(req.token, SecretKey, async(err,authoData)=>{
-            if(err){
-                res.send('Login before delete comment')
-            }else{
-                const id = req.params.id;
-                await Comment.deleteOne({_id: id});
-                res.status(200).json({message: "comment deleted"})
-            }
-        })
-       
-    } catch(error){
-        res.status(404).json({error: "That id doesn't exist"});
+        const id = req.params.id;
+        const allComments = await Post.findById(id);
+        
+        //comment id 
+        const commId = req.params.commId;
+        const removeComm = allComments.comments.map(data => data._id.toString()).indexOf(commId);
+        
+        allComments.comments.splice(removeComm, 1);
+        await allComments.save();
+        res.status(200).json('comment deleted')
+    } catch (error) {
+        res.status(404).json({error: "comment not found"})
     }
 }
 
 
 //like post
 const like = async(req,res)=>{
-    jwt.verify(req.token, userSecret, async(err,authoData)=>{
-        if(err){
-            console.log(err);
-            res.send('Sorry Your request not approved try again later')
+    try {
+        const id = req.params.id;
+        const blog = await Post.findById(id);
+        const user = await Signup.findById({_id: req.user._id});
+        const email = user.email;
+        if(!blog.likes.Peaples.includes(email) == true){
+            let count = blog.likes.count + 1;
+            let peaple = blog.likes.Peaples;
+            peaple.push(email);
+
+            await Post.findOneAndUpdate(
+                {_id: id},
+                {likes: {count,Peaples: peaple}}
+            );
+                res.status(200).json('liked')
         }else{
-            const user_id = session.userId;
-            if(user_id){
-                const blog_id = req.params.id;
-                const user = await UserReg.findById(user_id);
-                
+            let count = blog.likes.count - 1;
+            let peaple = blog.likes.Peaples.filter((eml)=> eml != email);
 
-                const addLike = new Like({
-                    userId: user_id,
-                    blogId: blog_id
-                })
-
-                await addLike.save();
-                const post = await Post.findById(blog_id).populate('likes');
-                
-                if(
-                     !post.likes.filter((like)=> like.userId.toString() === user_id).length > 0
-                ){
-                    post.likes.unshift(addLike);
-                    post.save().then((result)=>{
-                        res.send('like added')
-                    }).catch((err)=>{
-                        console.log(err);
-                    })
-                }else{
-                    const removeIndex = post.likes.map(like => like.userId.toString()).indexOf(user_id);
-                    post.likes.splice(removeIndex,1);
-                    post.save().then((result)=>{
-                        res.send('like removed')
-                    }).catch((err)=>{
-                        console.log(err);
-                    })
-                }
-
-                
-            }else{
-                res.send('Login again')
-            }
+            await Post.findOneAndUpdate(
+                {_id: id},
+                {likes: {count,Peaples: peaple}}
+            );
             
-            
-             
+            res.status(200).json('like removed')
         }
-    })
-
+    } catch (error) {
+        res.status(404).json('not found')
+    }
 }
 
 // get like related to blog
-const getLike =async(req,res)=>{
-    const id = req.params.id;
-    
-    await Post.findById(id).populate(['likes'])
-        .then((result)=>{
-            let getLikes = result.likes;
-            let count = 0;
-            getLikes.forEach((data)=>{
-                count++;
-            })
-            res.json(count)
-        }).catch((err)=>{
-            res.status(404).json({error: "not found"})
-        })
+const getLike = async(req,res)=>{
+    try {
+        const id = req.params.id;
+        let allLikes = await Post.findById(id);
+        let getLikes = allLikes.likes;
+        res.status(200).json(getLikes.count);
+    } catch (error) {
+        res.status(404).json('like not found')
+    }
 }
-
 export {addBlog,getBlogs,getBlogById,updateBlog,deleteBlog,addComm,getComm,allComm,delComment,like,getLike}

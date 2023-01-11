@@ -1,9 +1,7 @@
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 import bcrypt from 'bcryptjs';
-import {UserReg, Signup} from "../model/registerMod.js";
-import session from 'express-session';
-
+import {UserReg, Signup} from "../model/registerMod";
 
 
 //some global variable
@@ -16,24 +14,22 @@ const UserRegistration = (req,res)=>{
      //hashing password
     bcrypt.hash(password,10, async(err, hashPin)=>{
         if(err){
-            res.json({
-                err
-            })
+            res.json(err)
         }else{
-            const enterUser = new UserReg({
+            const enterUser = new Signup({
                 name,
                 email,
                 password: hashPin
             });
-            await enterUser.save()
-                .then((result)=>{
-                    res.json({
-                        message: "complite signup",
-                        result
-                    });
-                }).catch((error)=>{
-                    res.json({error})
-                })
+
+            const emailExist = await Signup.findOne({email: req.body.email});
+
+            if(emailExist){
+                res.status(400).json('already there')
+            }else{
+                await enterUser.save()
+                res.status(200).json('Complite Signup')
+            } 
         }
     })
     
@@ -42,49 +38,13 @@ const UserRegistration = (req,res)=>{
 
 //User login
 const userLogin = async(req,res)=>{
-    const {email, password} = req.body;
-    await UserReg.findOne({email})
-        .then((user)=>{
-            if (user) {
-                bcrypt.compare(password,user.password, (error,result)=>{
-                    if (error) {
-                        console.log(error)
-                    }
-                    if(result){
-                        let token = jwt.sign({user}, userSecret ,{expiresIn: '1h'});
-                        if (token) {
-                            session.userId = user.id;             
-                            res.json({
-                                message :  `${user.name}`,
-                                token
-                            })
-                        }else{
-                            session.userId = null;
-                        }
-                        
-                    }else{
-                        res.json({
-                            message: "password not matches"
-                        })
-                    }
-                })
-            }else{
-                res.json({
-                    message: 'unknown data, please make signup'
-                })
-            }
-        }).catch((error)=>{
-            console.log(error);
-            res.sendStatus(500).send('Server problem')
-        })
-
+    let token = jwt.sign({id: req.user._id}, userSecret );
+    res.status(200).json(token)
 }
-
-
 
 //admin user registration
  const register = async(req,res)=>{
-    bcrypt.hash(req.body.password, 10, (error,hashedPass)=>{
+    bcrypt.hash(req.body.password, 10, async(error,hashedPass)=>{
         if (error) {
             res.json({
                 error: "not hashed"
@@ -94,17 +54,19 @@ const userLogin = async(req,res)=>{
         const enterUser = new Signup({
             name,
             email,
+            role: 'admin',
             password: hashedPass
         });
 
-        enterUser.save()
-            .then((result)=>{
-                res.json({
-                    message: "complite signup"
-                })
-            }).catch((error)=>{
-                res.json({error})
-            })
+        const emailExist = await Signup.findOne({email: req.body.email});
+
+        if(emailExist){
+            res.status(400).json('already there')
+        }else{
+            enterUser.save()
+            res.json(enterUser)
+        }
+
     })
     
 }
@@ -112,59 +74,20 @@ const userLogin = async(req,res)=>{
 
 //getting all admin signed in
 
-const signedIn = (req,res)=>{
-    jwt.verify(req.token, SecretKey, async(err,authoData)=>{
-        if(err){
-            res.send('Login first')
-        }else{
-            await Signup.find()
-            .then((result)=>{
-                res.send(result)
-            }).catch((err)=>{
-                res.json({
-                    error: err
-                })
-            })
-        }
-    })
-    
+const signedIn = async(req,res)=>{
+    const result = await Signup.find({role: 'admin'})
+    res.status(200).json(result);
 }
 
-//Admin login
+//delete users
+const deleteUser = async(req,res)=>{
+    try {
+        const id = req.params.id;
+        await Signup.deleteOne({_id: id});
+        res.status(200).json({msg: 'user deleted'});  
+    } catch (error) {
+        res.status(404).json({error: "user not found"});
+    }
+}
 
-const login = async(req,res)=>{
-    const adminEmail = req.body.email;
-    const adminPin = req.body.password;
-    await Signup.findOne({email: adminEmail})
-        .then((user)=>{
-            
-            if (user) {
-                bcrypt.compare(adminPin,user.password, (error,result)=>{
-                    if(error){
-                     console.log(error)
-                    }
-                    if(result){
-                        let token = jwt.sign({name: user.name}, SecretKey , {expiresIn: '1h'});
-                        res.json({
-                            message: `${user.name}`,
-                            token
-                        })
-                    }else{
-                        res.json({
-                            message: "password not matches"
-                        })
-                    }
-                })
-            }else{
-                res.json({
-                    message: 'unknown data, please make signup'
-                })
-            }
-        }).catch((error)=>{
-            console.log(error);
-            res.sendStatus(500).send('Server problem')
-        })
-} 
-
-
-export {UserRegistration, userLogin,register,signedIn, login}
+export {UserRegistration, userLogin,register,signedIn,deleteUser}
