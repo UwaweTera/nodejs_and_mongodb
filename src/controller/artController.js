@@ -10,8 +10,6 @@ import { Signup } from "../model/registerMod";
 const SecretKey = process.env.JWT_SECRET;
 const userSecret = process.env.USER_SECRET;
 
-
-
 //adding blog post
 const addBlog =async (req,res)=>{
     try {

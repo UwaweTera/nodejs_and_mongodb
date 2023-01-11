@@ -234,6 +234,7 @@ router1.patch('/:id/update',passport.authenticate('jwt',{session: false}),checki
 //delete blogs
 router1.delete('/:id',passport.authenticate('jwt',{session: false}),checkingAdmin,deleteBlog);
 
+
 //add comments
 // adding articles
 /**
