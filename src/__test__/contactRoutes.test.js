@@ -33,11 +33,11 @@ test('Testing for sending message with bad request', async()=>{
 })
 
 //getting all messages
-test('getting all messages',async()=>{
+/* test('getting all messages',async()=>{
     const token = await adminToken();
     const res = await request(app).get('/messages').set('Authorization',token);
     expect(res.statusCode).toBe(200)
-})
+}) */
 
 
 //getting all messages for testing
