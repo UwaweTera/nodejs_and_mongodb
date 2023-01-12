@@ -47,10 +47,11 @@ app.use(express.urlencoded({extended: false}));
 app.use(passport.initialize());
 app.use("/",router);
 
+const port = process.env.PORT;
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.REMOTEDB,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
-    app.listen(process.env.PORT,()=>{
-        console.log(`The server is running on: ${process.env.PORT}`);
+    app.listen(port,()=>{
+        console.log(`The server is running on: ${port}`);
     })
 }).catch((err)=>{
     console.log(err)
