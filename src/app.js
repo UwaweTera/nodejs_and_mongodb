@@ -17,7 +17,7 @@ const options = {
             description: 'Simple express api'
         },
         servers: [{
-            url : "https://my-bland.cyclic.app/blogs"
+            url : "https://my-bland.cyclic.app"
         }],
         components: {
            securitySchemes:{
