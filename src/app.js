@@ -15,10 +15,10 @@ const options = {
             title: 'My brand api',
             version: '1.0.0',
             description: 'Simple express api'
-        },/* 
+        },
         servers: [{
-            url : "http://localhost:2000"
-        }], */
+            url : "https://my-bland.cyclic.app/blogs"
+        }],
         components: {
            securitySchemes:{
             bearerAuth: {
