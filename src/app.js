@@ -6,8 +6,6 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import SwaggerUI from 'swagger-ui-express';
 import router from './routes/routes';
 
-
-const dbURI = process.env.DBURI;
 const app = express();
 
 const options = {
@@ -49,7 +47,8 @@ app.use(express.urlencoded({extended: false}));
 app.use(passport.initialize());
 app.use("/",router);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 2000;
+const dbURI = process.env.DBURI;
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.REMOTEDB,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
     app.listen(port,()=>{
