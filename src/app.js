@@ -17,10 +17,10 @@ const options = {
             title: 'My brand api',
             version: '1.0.0',
             description: 'Simple express api'
-        },
+        },/* 
         servers: [{
             url : "http://localhost:2000"
-        }],
+        }], */
         components: {
            securitySchemes:{
             bearerAuth: {
