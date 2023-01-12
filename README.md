@@ -4,7 +4,7 @@
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/UwaweTera/nodejs_and_mongodb/tree/develop.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/UwaweTera/nodejs_and_mongodb/tree/develop)
 
-[![Coverage Status](https://coveralls.io/repos/github/UwaweTera/nodejs_and_mongodb/badge.svg?branch=testing)](https://coveralls.io/github/UwaweTera/nodejs_and_mongodb?branch=testing)
+[![Coverage Status](https://coveralls.io/repos/github/UwaweTera/nodejs_and_mongodb/badge.svg)](https://coveralls.io/github/UwaweTera/nodejs_and_mongodb)
 
 # DESCRIPTION
 
