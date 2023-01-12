@@ -47,7 +47,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(passport.initialize());
 app.use("/",router);
 
-const port = process.env.PORT || 2000;
+const port = process.env.PORT;
 const dbURI = process.env.DBURI;
 mongoose.set('strictQuery', true);
 mongoose.connect(process.env.REMOTEDB,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
