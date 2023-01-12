@@ -17,7 +17,7 @@ const options = {
             description: 'Simple express api'
         },
         servers: [{
-            url : "https://my-bland.cyclic.app"
+            url : process.env.SWAGGERURL
         }],
         components: {
            securitySchemes:{
