@@ -4,7 +4,8 @@
   "main": "./src/app.js",
   "scripts": {
     "build": "babel src -d dist",
-    "start": "better-npm-run dev",
+    "start": "babel-node ./src/app.js",
+    "dev": "better-npm-run dev",
     "test": "jest --collect-coverage && coveralls < coverage/lcov.info"
   },
   "betterScripts": {
