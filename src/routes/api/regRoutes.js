@@ -14,12 +14,6 @@ const router3 = express.Router();
  *  responses: 
  *           200:
  *               description: Success
- *               content:
- *                   application/json:
- *                       schema:
- *                           type: array
- *                       items: 
- *                           $ref: '#components/schemas/Post'
  *           400:
  *               description: Bad request
  *           401:
@@ -107,11 +101,7 @@ router3.post('/signup',UserVald,UserRegistration)
  *                      password: 123jdksi
  *      responses:
  *          200:
- *            description: ok
- *            content: 
- *              application/json:
- *                schema:
- *                  $ref: '#/components/schemas/Signup'
+ *            description: Provide Token
  *          400: 
  *            $ref: '#/components/responses/400'
  *          401:
@@ -187,14 +177,6 @@ router3.get('/',passport.authenticate('jwt',{session: false}),checkingAdmin,sign
 *        description: Complite deleted
 *      401:
 *        description: Unauthorized
-*        content:
-*           appication/json:
-*               schema:
-*                   type: object
-*                   properties:
-*                       messages:
-*                           type: string
-*                           example: You are not authorized to access this system
 *      404:
 *        description: not found 
 */

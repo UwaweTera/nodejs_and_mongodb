@@ -16,12 +16,6 @@ const router2 = express.Router();
  *  responses: 
  *           200:
  *               description: Success
- *               content:
- *                   application/json:
- *                       schema:
- *                           type: array
- *                       items: 
- *                           $ref: '#components/schemas/Post'
  *           400:
  *               description: Bad request
  *           401:

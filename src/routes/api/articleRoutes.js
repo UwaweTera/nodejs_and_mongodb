@@ -62,12 +62,6 @@ const router1 = express.Router();
 *       responses: 
 *           200:
 *               description: Success
-*               content:
-*                   application/json:
-*                       schema:
-*                           type: array
-*                       items: 
-*                           $ref: '#components/schemas/Post'
 *           400:
 *               description: Bad request
 *           401:
@@ -95,6 +89,8 @@ const router1 = express.Router();
 *   responses:
 *      200:
 *           $ref: '#/components/responses/200' 
+*      500:
+*           description: Server error.
 */
 
 //get all blogs
@@ -219,14 +215,6 @@ router1.patch('/:id/update',passport.authenticate('jwt',{session: false}),checki
 *        description: Complite deleted
 *      401:
 *        description: Unauthorized
-*        content:
-*           appication/json:
-*               schema:
-*                   type: object
-*                   properties:
-*                       messages:
-*                           type: string
-*                           example: You are not authorized to access this system
 *      404:
 *        description: not found 
 */
@@ -328,14 +316,6 @@ router1.get('/comments',passport.authenticate('jwt',{session: false}),checkingAd
 *        description: Complite deleted comment
 *      401:
 *        description: Unauthorized
-*        content:
-*           appication/json:
-*               schema:
-*                   type: object
-*                   properties:
-*                       messages:
-*                           type: string
-*                           example: You are not authorized to access this system
 *      404:
 *        description: not found 
 */

@@ -2,6 +2,7 @@ import express from 'express';
 import "dotenv/config";
 import mongoose from 'mongoose';
 import passport from 'passport';
+import fileUpload from 'express-fileupload';
 import swaggerJSDoc from 'swagger-jsdoc';
 import SwaggerUI from 'swagger-ui-express';
 import router from './routes/routes';

@@ -1,5 +1,3 @@
-
-import mongoose from "mongoose";
 import 'dotenv/config';
 import {Post, Comment, Like} from "../model/articleMod";
 import session from 'express-session';
@@ -22,6 +20,7 @@ const addBlog =async (req,res)=>{
         const blog = await insBlog.save();
         res.status(200).json(blog)
     } catch (error) {
+        console.log(error);
         res.status(500).json('Server Error. try to add blog later')
     }
       
