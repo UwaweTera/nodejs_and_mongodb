@@ -2,6 +2,7 @@ import express from 'express';
 import "dotenv/config";
 import mongoose from 'mongoose';
 import passport from 'passport';
+import cors from 'cors'
 import fileUpload from 'express-fileupload';
 import swaggerJSDoc from 'swagger-jsdoc';
 import SwaggerUI from 'swagger-ui-express';
@@ -46,6 +47,7 @@ app.use('/api-docs',SwaggerUI.serve,SwaggerUI.setup(specs))
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(passport.initialize());
+app.use(cors());
 app.use("/",router);
 
 const port = process.env.PORT;
