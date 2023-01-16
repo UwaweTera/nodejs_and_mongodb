@@ -5,7 +5,7 @@ import {commentVal,blogValidation,blogUpdVal} from "../validater/articleVal";
 const blogVal = async(req, res,next)=>{
     const {error, value} =  blogValidation.validate(req.body, {abortEarly : false});
     if(error){
-        return res.status(400).send(error.details[0].message)
+        return res.status(400).json(error.details[0].message)
     }
     // req.valData = value;
     next();
@@ -14,7 +14,7 @@ const blogVal = async(req, res,next)=>{
 const updateVal = async(req, res,next)=>{
     const {error, value} =  blogUpdVal.validate(req.body, {abortEarly : false});
     if(error){
-        return res.status(400).send(error.details[0].message)
+        return res.status(400).json(error.details[0].message)
     }
     // req.valData = value;
     next();
@@ -23,7 +23,7 @@ const updateVal = async(req, res,next)=>{
 const commVal = async(req, res,next)=>{
     const {error, value} =  commentVal.validate(req.body, {abortEarly : false});
     if(error){
-        return res.status(400).send(error.details[0].message)
+        return res.status(400).json(error.details[0].message)
     }
     // req.valData = value;
     next();
