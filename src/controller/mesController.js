@@ -17,14 +17,14 @@ const ContactContr = async (req,res)=>{
             name,email,message
         })
         const result = await insContact.save();
-        res.status(200).send(result);
+        res.status(200).json('message received');
 } 
 
 //get all message
 const messages = async(req, res)=>{
         let getMessage = await Contact.find();
         res.status(200);
-        res.send(getMessage)
+        res.json(getMessage)
    
 }
 
