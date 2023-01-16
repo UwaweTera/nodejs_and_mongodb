@@ -39,7 +39,11 @@ const UserRegistration = (req,res)=>{
 //User login
 const userLogin = async(req,res)=>{
     let token = jwt.sign({id: req.user._id}, userSecret );
-    res.status(200).json(token)
+    res.status(200).json({
+        name: req.user.name,
+        role: req.user.role,
+        token
+    })
 }
 
 //admin user registration

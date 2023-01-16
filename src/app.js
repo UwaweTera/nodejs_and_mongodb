@@ -52,7 +52,7 @@ app.use("/",router);
 
 const port = process.env.PORT;
 mongoose.set('strictQuery', true);
-mongoose.connect(process.env.DBTESTURI,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
+mongoose.connect(process.env.REMOTEDB,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
     app.listen(port,()=>{
         console.log(`The server is running on: ${port}`);
     })
