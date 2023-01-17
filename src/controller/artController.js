@@ -2,25 +2,33 @@ import 'dotenv/config';
 import {Post, Comment, Like} from "../model/articleMod";
 import session from 'express-session';
 import { Signup } from "../model/registerMod";
-
+import cloudinary from '../cloudinary';
 
 //some global variable
 const SecretKey = process.env.JWT_SECRET;
 const userSecret = process.env.USER_SECRET;
 
 //adding blog post
-const addBlog =async (req,res)=>{
+const addBlog = async(req,res)=>{
+    // console.log('img detail: ',req.file.path)
+    const {head,image,body} = req.body;
     try {
-        const {head,image,body} = req.body;
+        
+        const imgUpload = await cloudinary.uploader.upload(image,{
+            folder: 'uploded_image'
+        });
         const insBlog = new Post({
             head,
-            image,
+            image:{
+                public_id: imgUpload.public_id,
+                url: imgUpload.secure_url
+            },
             body
         })
         const blog = await insBlog.save();
-        res.status(200).json(blog)
+        res.status(200).send(blog)
     } catch (error) {
-        console.log(error);
+        console.log(error)
         res.status(500).json('Server Error. try to add blog later')
     }
       
