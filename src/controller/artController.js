@@ -69,7 +69,13 @@ const updateBlog = async(req,res)=>{
             post.head = req.body.head;
         }
         if(req.body.image){
-            post.image = req.body.image;
+            const imgUpload = await cloudinary.uploader.upload(req.body.image,{
+                folder: 'uploded_image'
+            });
+            post.image = {
+                public_id: imgUpload.public_id,
+                url: imgUpload.secure_url
+            }
         }
         if(req.body.body){
             post.body = req.body.body;
@@ -101,52 +107,24 @@ const addComm = async(req,res)=>{
         let user = await Signup.findOne({_id: req.user._id});
         const name = user.name;
         const email = user.email; 
-        const text = req.body.text; 
-        const comment = new Comment({
+        const comment = req.body.comment; 
+        const insComment = new Comment({
             name,
             email,
-            text,
+            comment,
             blogId: id
         });
-        await comment.save()
+        await insComment.save()
         const specifiedBlog = await Post.findById(id).populate('comments')
-        specifiedBlog.comments.push(comment);
+        specifiedBlog.comments.push(insComment);
         specifiedBlog.save()
-        res.status(200).json(comment)     
+        res.status(200).json(insComment)     
     } catch (error) {
-        res.status(500);
-        res.json('Server error')
+        console.log(error)
+        res.status(500).json('Server error')
     }
 }
-/* const addComm = async(req,res)=>{
 
-    try {
-        const id = req.params.id;
-        const user_id = session.userId;
-        if(user_id){
-            const UserId = session.userId;
-            let user = await UserReg.findById(UserId);
-            res.send(user_id);
-            const name = user.name;
-            const email = user.email; 
-            const text = req.body.text; 
-            
-            const specifiedBlog = await Post.findOne({_id: req.params.id})
-            const comment = new Comment({
-                name: req.body.name,
-                email: req.body.email,
-                text: req.body.text
-            });
-            specifiedBlog.comments.push(comment);
-            await specifiedBlog.save();
-            res.send(specifiedBlog)
-        }
-    } catch (error) {
-        res.status(401);
-        res.send('plese make login')
-    }
-
-} */
 
 //read all comments
 const allComm = async(req,res)=>{

@@ -15,7 +15,7 @@ const blogUpdVal = Joi.object({
 
 //comment validation joi
 const commentVal = Joi.object({
-    text: Joi.string().min(10).required()
+    comment: Joi.string().min(10).required()
 })
 
 export {blogValidation, blogUpdVal,commentVal}
