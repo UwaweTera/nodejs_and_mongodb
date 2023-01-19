@@ -32,6 +32,9 @@ const blogSchema = new Schema({
             default: 0
         },
         Peaples: []
+    },
+    date: {
+        type: String
     }
 
 });
@@ -52,6 +55,9 @@ const commetSchema = new Schema({
     comment:{
         type: String,
         required: true
+    },
+    date: {
+        type: String
     },
     blogId:{
         type: mongoose.Schema.Types.ObjectId,

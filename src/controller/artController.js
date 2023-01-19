@@ -10,7 +10,7 @@ const userSecret = process.env.USER_SECRET;
 
 //adding blog post
 const addBlog = async(req,res)=>{
-    // console.log('img detail: ',req.file.path)
+    let currentDate = new Date().toDateString();
     const {head,image,body} = req.body;
     try {
         
@@ -23,7 +23,8 @@ const addBlog = async(req,res)=>{
                 public_id: imgUpload.public_id,
                 url: imgUpload.secure_url
             },
-            body
+            body,
+            date: currentDate
         })
         const blog = await insBlog.save();
         res.status(200).send(blog)
@@ -103,6 +104,7 @@ const deleteBlog = async(req,res)=>{
 const addComm = async(req,res)=>{
 
     try {
+        let currentDate = new Date().toDateString();
         const id = req.params.id;
         let user = await Signup.findOne({_id: req.user._id});
         const name = user.name;
@@ -112,6 +114,7 @@ const addComm = async(req,res)=>{
             name,
             email,
             comment,
+            date: currentDate,
             blogId: id
         });
         await insComment.save()
