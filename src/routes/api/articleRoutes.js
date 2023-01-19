@@ -276,21 +276,6 @@ router1.get('/:id/comments',getComm)
 
 /**
 * @swagger
-* /blogs/comments:
-*  get:
-*   summary: Return all the comments 
-*   tags: [Blogs]
-*   responses:
-*      200:
-*           $ref: '#/components/responses/200' 
-*      500:
-*           $ref: '#/components/responses/500' 
-*/
-//read all comments
-router1.get('/comments',passport.authenticate('jwt',{session: false}),checkingAdmin, allComm)
-
-/**
-* @swagger
 * /blogs/{id}/comments/{commId}:
 *  delete:
 *   summary: Delete comment

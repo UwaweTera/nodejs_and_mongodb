@@ -12,7 +12,7 @@ let adminToken = async()=>{
         email: 'admin@gmail.com',
         password: 'admin13535'
     })
-    return 'Bearer ' + adminLogin.body;
+    return 'Bearer ' + adminLogin.body.token;
 }
 
 //getting user token
@@ -26,7 +26,7 @@ let userToken = async()=>{
         email: 'user@gmail.com',
         password: 'user3535'
     })
-    return 'Bearer ' + userLogin.body;
+    return 'Bearer ' + userLogin.body.token;
 }
 //testing single blog based on id for bad request
 test('Testing one blog for bad request', async()=>{

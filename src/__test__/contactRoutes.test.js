@@ -5,7 +5,7 @@ import { Signup } from "../model/registerMod";
 import { Post } from "../model/articleMod";
 beforeAll(async()=>{
     await Signup.deleteMany()
-    await Post.deleteMany();
+    // await Post.deleteMany();
 })
 
 /* afterAll(async()=>{
