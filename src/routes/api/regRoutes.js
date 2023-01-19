@@ -97,8 +97,8 @@ router3.post('/signup',UserVald,UserRegistration)
  *                  schema:
  *                      $ref: '#/components/schemas/Signup'
  *                  example:
- *                      email: samu@gmail.com
- *                      password: 123jdksi
+ *                      email: admin@gmail.com
+ *                      password: admin13535
  *      responses:
  *          200:
  *            description: Provide Token
