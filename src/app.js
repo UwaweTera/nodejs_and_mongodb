@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 import passport from 'passport';
 import cors from 'cors'
-import fileUpload from 'express-fileupload';
 import swaggerJSDoc from 'swagger-jsdoc';
 import SwaggerUI from 'swagger-ui-express';
 import router from './routes/routes';
