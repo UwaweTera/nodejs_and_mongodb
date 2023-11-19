@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 import passport from 'passport';
 import cors from 'cors'
-import fileUpload from 'express-fileupload';
 import swaggerJSDoc from 'swagger-jsdoc';
 import SwaggerUI from 'swagger-ui-express';
 import router from './routes/routes';
@@ -54,7 +53,7 @@ app.use("/",router);
 
 const port = process.env.PORT;
 mongoose.set('strictQuery', true);
-mongoose.connect(process.env.DBURI,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
+mongoose.connect(process.env.REMOTEDB,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
     app.listen(process.env.PORT,()=>{
         console.log(`The server is running on: ${process.env.PORT}`);
     })

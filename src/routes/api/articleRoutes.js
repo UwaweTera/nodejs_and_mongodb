@@ -3,7 +3,7 @@ import "../../middlewares/autho";
 import passport from "passport";
 import { checkingAdmin,checkingUser } from "../../middlewares/checkUser";
 import {blogVal,updateVal,commVal} from "../../middlewares/articleMid";
-import {addBlog,getBlogs,getBlogById,updateBlog,deleteBlog,addComm,allComm,getComm,delComment,like,getLike} from "../../controller/artController";
+import {addBlog,getBlogs,getBlogById,updateBlog,deleteBlog,addComm,getComm,delComment,like,getLike} from "../../controller/artController";
 const router1 = express.Router();
 
 //create swagger schemas
