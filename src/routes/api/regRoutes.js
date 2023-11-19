@@ -1,8 +1,26 @@
-import  express  from "express";
-import {UserVald,adminVald} from "../../middlewares/autho";
+import express from "express";
+import {
+  UserVald,
+  adminVald,
+  roleVald,
+  updateProfVald,
+} from "../../middlewares/autho";
 import "../../middlewares/autho";
-import { checkingAdmin,checkingUser } from "../../middlewares/checkUser";
-import {UserRegistration, userLogin,register,signedIn,deleteUser}  from "../../controller/regController";
+import { checkingAdmin, checkingUser } from "../../middlewares/checkUser";
+import {
+  UserRegistration,
+  userLogin,
+  register,
+  signedIn,
+  deleteUser,
+  assignRole,
+  getProfile,
+  updateProfile,
+  getReqAdminRole,
+  requestAdminRole,
+  rejectReqAdminRole,
+} from "../../controller/regController";
+import { UserExist } from "../../middlewares/UserExist";
 import passport from "passport";
 const router3 = express.Router();
 
@@ -11,7 +29,7 @@ const router3 = express.Router();
 /**
  * @swagger
  * components:
- *  responses: 
+ *  responses:
  *           200:
  *               description: Success
  *           400:
@@ -53,7 +71,6 @@ const router3 = express.Router();
  *                 type: string
  */
 
-
 /**
  * @swagger
  * tags:
@@ -78,16 +95,16 @@ const router3 = express.Router();
  *              description: Successfull signup
  *          400:
  *              $ref: '#/components/responses/400'
- * 
-  */
+ *
+ */
 //User registration
-router3.post('/signup',UserVald,UserRegistration)
+router3.post("/signup", UserVald, UserRegistration);
 //user login
 
 /**
  * @swagger
  * /user/login:
- *  post:   
+ *  post:
  *      summary: user and admin login
  *      tags: [Registration]
  *      requestBody:
@@ -102,16 +119,20 @@ router3.post('/signup',UserVald,UserRegistration)
  *      responses:
  *          200:
  *            description: Provide Token
- *          400: 
+ *          400:
  *            $ref: '#/components/responses/400'
  *          401:
  *            description: Unauthorize
- *      
- * 
+ *
+ *
  */
-router3.post('/login',passport.authenticate('local',{session: false}),userLogin)
+router3.post(
+  "/login",
+  passport.authenticate("local", { session: false }),
+  userLogin
+);
 
-//Admin registration 
+//Admin registration
 
 /**
  * @swagger
@@ -130,10 +151,10 @@ router3.post('/login',passport.authenticate('local',{session: false}),userLogin)
  *              description: Successfull signup
  *          400:
  *              $ref: '#/components/responses/400'
- * 
-  */
+ *
+ */
 
-router3.post('/adminsignup',adminVald,register);
+router3.post("/adminsignup", adminVald, register);
 
 //Get all admin registered
 /**
@@ -148,7 +169,7 @@ router3.post('/adminsignup',adminVald,register);
  *    responses:
  *          200:
  *            description: ok
- *            content: 
+ *            content:
  *              application/json:
  *                schema:
  *                  type: array
@@ -158,28 +179,83 @@ router3.post('/adminsignup',adminVald,register);
  *            description: Unauthorize
  */
 
-router3.get('/',passport.authenticate('jwt',{session: false}),checkingAdmin,signedIn);
-
+router3.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  checkingAdmin,
+  signedIn
+);
 
 /**
-* @swagger
-* /user/{id}:
-*  delete:
-*   summary: Delete one user
-*   tags: [Registration]
-*   security:
-*      - {}
-*      - bearerAuth: []
-*   parameters:
-*          - $ref: '#/components/parameters/userId'
-*   responses:
-*      200:
-*        description: Complite deleted
-*      401:
-*        description: Unauthorized
-*      404:
-*        description: not found 
-*/
+ * @swagger
+ * /user/{id}:
+ *  delete:
+ *   summary: Delete one user
+ *   tags: [Registration]
+ *   security:
+ *      - {}
+ *      - bearerAuth: []
+ *   parameters:
+ *          - $ref: '#/components/parameters/userId'
+ *   responses:
+ *      200:
+ *        description: Complite deleted
+ *      401:
+ *        description: Unauthorized
+ *      404:
+ *        description: not found
+ */
 //delete users
-router3.delete('/:id',passport.authenticate('jwt',{session: false}),checkingAdmin,deleteUser);
-export default router3
+router3.delete(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  checkingAdmin,
+  UserExist,
+  deleteUser
+);
+// assign role
+router3.patch(
+  "/:id/role",
+  passport.authenticate("jwt", { session: false }),
+  checkingAdmin,
+  UserExist,
+  roleVald,
+  assignRole
+);
+// get profile
+router3.get(
+  "/profile",
+  passport.authenticate("jwt", { session: false }),
+  UserExist,
+  getProfile
+);
+// update profile
+router3.patch(
+  "/update",
+  passport.authenticate("jwt", { session: false }),
+  UserExist,
+  updateProfVald,
+  updateProfile
+);
+// get all requested admin role
+router3.get(
+  "/requests",
+  passport.authenticate("jwt", { session: false }),
+  checkingAdmin,
+  getReqAdminRole
+);
+// request admin role route
+router3.patch(
+  "/request/admin",
+  passport.authenticate("jwt", { session: false }),
+  UserExist,
+  requestAdminRole
+);
+router3.patch(
+  "/request/reject",
+  passport.authenticate("jwt", { session: false }),
+  UserExist,
+  rejectReqAdminRole
+);
+
+export default router3;

@@ -12,8 +12,8 @@ const userSecret = process.env.USER_SECRET;
 const addBlog = async(req,res)=>{
     let currentDate = new Date().toDateString();
     const {head,image,body} = req.body;
+    const {id} = req.user;
     try {
-        
         const imgUpload = await cloudinary.uploader.upload(image,{
             folder: 'uploded_image'
         });
@@ -24,7 +24,9 @@ const addBlog = async(req,res)=>{
                 url: imgUpload.secure_url
             },
             body,
+            userPost: id,
             date: currentDate
+
         })
         const blog = await insBlog.save();
         res.status(200).send(blog)
@@ -42,7 +44,7 @@ const addBlog = async(req,res)=>{
 
 const getBlogs = async(req, res)=>{
         try {
-            let allBlogs = await Post.find().populate('comments')
+            let allBlogs = await Post.find().populate('comments').populate('userPost');
             res.status(200).send(allBlogs);   
         } catch (error) {
             res.status(500).json('Server Error. try to add blog later')

@@ -1,6 +1,7 @@
 import express from 'express';
 import "dotenv/config";
 import mongoose from 'mongoose';
+import morgan from 'morgan';
 import passport from 'passport';
 import cors from 'cors'
 import fileUpload from 'express-fileupload';
@@ -48,11 +49,12 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(passport.initialize());
 app.use(cors());
+app.use(morgan('dev'));
 app.use("/",router);
 
 const port = process.env.PORT;
 mongoose.set('strictQuery', true);
-mongoose.connect(process.env.REMOTEDB,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
+mongoose.connect(process.env.DBURI,{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
     app.listen(process.env.PORT,()=>{
         console.log(`The server is running on: ${process.env.PORT}`);
     })

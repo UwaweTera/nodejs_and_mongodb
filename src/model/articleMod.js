@@ -33,6 +33,11 @@ const blogSchema = new Schema({
         },
         Peaples: []
     },
+
+    userPost: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'Signup'
+    },
     date: {
         type: String
     }
